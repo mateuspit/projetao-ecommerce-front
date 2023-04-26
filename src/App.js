@@ -7,6 +7,7 @@ import Home from "./pages/Home"
 import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
 import Product from "./pages/Product"
+import Success from "./pages/Success"
 
 export default function App() {
 
@@ -16,9 +17,10 @@ export default function App() {
         <UserContext.Provider >
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/cadastro" element={<SignUp />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route path="/" element={<Home />} />
-            <Route path="/:id" element={<Product />} />
+            <Route path="/product/:id" element={<Product />} />
+            <Route path="/success" element={<Success />} />
           </Routes>
         </UserContext.Provider >
       </BrowserRouter >
