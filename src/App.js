@@ -1,6 +1,6 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
-import styled from "styled-components"
+import styled from "styled-components";
 
 import { UserContext } from "./context/UserContext"
 import Home from "./pages/Home"
@@ -33,6 +33,6 @@ export default function App() {
 }
 
 const PagesContainer = styled.main`
-  width: 100vw;
-  height: 100vw;
-`
+	width: 100vw;
+	height: 100vw;
+`;
