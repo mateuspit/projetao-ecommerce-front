@@ -1,10 +1,10 @@
 /* eslint-disable */
 import styled from "styled-components";
-import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import logoWhite from "../assets/images/logo-white.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "../contexts/UserContext.js";
 
 export default function Login() {
 	const [email, setEmail] = useState("");
@@ -12,6 +12,7 @@ export default function Login() {
 	const [loginPageDisable, setLoginPageDisable] = useState(false);
 	const [isLinkDisabled, setIsLinkDisabled] = useState(false);
 	const navigate = useNavigate();
+	const { setToken } = useContext(UserContext);
 
 	function getLoginData(event) {
 		event.preventDefault();
@@ -19,9 +20,26 @@ export default function Login() {
 		setIsLinkDisabled(true);
 
 		const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
-		const promise = axios.post(`${process.env.REACT_APP_API_URL}/sign-in`, {
+		const promise = axios.post(`${process.env.REACT_APP_API_URL}sign-in`, {
 			email,
 			password,
+		});
+
+		promise.then((res) => {
+			const { token } = res.data;
+			const authorization = `Bearer ${token}`;
+			setToken(authorization);
+			setLoginPageDisable(false);
+			setIsLinkDisabled(false);
+			navigate("/home");
+		});
+
+		promise.catch((res) => {
+			console.log("catch");
+			alert(res.response.data);
+			setLoginPageDisable(false);
+			setIsLinkDisabled(false);
+			setPassword("");
 		});
 	}
 
