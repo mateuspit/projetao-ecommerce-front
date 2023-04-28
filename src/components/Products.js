@@ -1,60 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import axios from "axios";
-import { UserContext } from "../contexts/UserContext";
 
-export default function Products() {
-	const navigate = useNavigate();
-
-	const token = "exemple";
-	const { products, setProducts } = useContext(UserContext);
+// eslint-disable-next-line react/prop-types
+export default function Products({ productsArray }) {
+	const [products, setProducts] = useState([]);
 	const [productDetails, setProductDetails] = useState([]);
 
-	const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
-
-	const test = [
-		{
-			productID: "prod1",
-			qntd: 1,
-		},
-		{
-			productID: "prod2",
-			qntd: 2,
-		},
-		{
-			productID: "prod3",
-			qntd: 3,
-		},
-	];
-	setProducts(test);
-
 	useEffect(() => {
-		async function fetchProductDetails() {
-			try {
-				const details = await Promise.all(
-					products.map(async (product) => {
-						const config = {
-							headers: {
-								Authorization: `Bearer ${token}`,
-							},
-						};
-						const { data } = await axios.get(
-							`${REACT_APP_API_URL}products`,
-							config
-						);
-						return { ...data, qntd: product.qntd };
-					})
-				);
-				setProductDetails(details);
-			} catch (err) {
-				console.log("ERR ", err.response.data);
-				navigate("/");
-			}
-		}
-
-		fetchProductDetails();
-	}, [products, navigate, REACT_APP_API_URL, token]);
+		setProducts(productsArray);
+	}, [productsArray]);
+	console.log(products, setProductDetails);
 
 	const increaseQuantity = (productID) => {
 		setProducts((prevProducts) =>

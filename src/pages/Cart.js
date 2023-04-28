@@ -6,8 +6,27 @@ import Products from "../components/Products";
 export default function Cart() {
 	const navigate = useNavigate();
 
+	const products = [
+		{
+			_id: "lksdvnj6as4vs6fv5fsv",
+			name: "Produto 1",
+			description: "Descrição do produto 1",
+			image: "url/imagem/produto1.jpg",
+			price: 29.99,
+			qntd: 1,
+		},
+		{
+			_id: "lksd5f7cs6gsr6gvr6g2v",
+			name: "Produto 2",
+			description: "Descrição do produto 2",
+			image: "url/imagem/produto2.jpg",
+			price: 59.99,
+			qntd: 2,
+		},
+	];
+
 	function handleCart() {
-		navigate("/checkout");
+		navigate("/checkout", { state: { products } });
 	}
 
 	return (
@@ -15,7 +34,7 @@ export default function Cart() {
 			<h1>Carrinho</h1>
 			<Link to="/">Continuar comprando</Link>
 
-			<Products />
+			<Products productsArray={products}/>
 
 			<CheckoutButton onClick={handleCart}>Continuar</CheckoutButton>
 		</CartContainer>
