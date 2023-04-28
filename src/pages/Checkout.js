@@ -7,25 +7,30 @@ import axios from "axios";
 
 export default function Checkout() {
 	// const { user } = useContext(UserContext);
-	// const token = user;
+	const token = "user";
+
 	const navigate = useNavigate();
 
 	const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 	function handlepurchase() {
-		// const body = {
-		// 	user,
-		// };
+		const body = {
+			products,
+			cpf,
+			cardName,
+			cardNumber,
+			expirationDate,
+			cardCVC,
+		};
 
-		// const config = {
-		// 	headers: {
-		// 		Authorization: `Bearer ${token}`,
-		// 	},
-		// };
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
 
 		axios
-			.post(`${REACT_APP_API_URL}/checkout`)
-			// .post(`${REACT_APP_API_URL}/checkout`, body, config)
+			.post(`${REACT_APP_API_URL}/checkout`, body, config)
 			.then((res) => {
 				console.log(res.data);
 				navigate("/success");
