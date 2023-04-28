@@ -4,10 +4,32 @@ import styled from "styled-components";
 // import { UserContext } from "../context/UserContext";
 
 export default function Products() {
-	// const { purchase } = useContext(UserContext);
+	// const { products } = useContext(UserContext);
+
+	const products = [
+		{
+			productID: "prod1",
+			qntd: 1,
+		},
+		{
+			productID: "prod2",
+			qntd: 2,
+		},
+		{
+			productID: "prod3",
+			qntd: 3,
+		},
+	];
+
 	return (
 		<>
 			<ProductsContainer>
+				{/* {products.map((prod, index) => {
+					const { productID, qntd } = prod;
+
+					
+					return
+				})} */}
 				<p>Produtos</p>
 				<p>Produtos</p>
 			</ProductsContainer>
