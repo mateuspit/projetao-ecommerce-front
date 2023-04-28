@@ -31,7 +31,7 @@ export default function Login() {
 			setToken(authorization);
 			setLoginPageDisable(false);
 			setIsLinkDisabled(false);
-			navigate("/home");
+			navigate("/");
 		});
 
 		promise.catch((res) => {

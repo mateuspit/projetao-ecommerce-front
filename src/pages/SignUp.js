@@ -34,15 +34,19 @@ export default function Login() {
 				setToken(authorization);
 				setLoginPageDisable(false);
 				setIsLinkDisabled(false);
-				navigate("/home");
+				navigate("/login");
 			});
 
 			promise.catch((res) => {
 				console.log("catch");
+				//console.log(res);
+				//console.log(res.response.data);
+				//console.log(res.response.data.errors);
 				alert(res.response.data);
 				setLoginPageDisable(false);
 				setIsLinkDisabled(false);
 				setPassword("");
+				setPasswordConfirm("");
 			});
 		} else {
 			alert("As senhas não são iguais!");
@@ -96,7 +100,7 @@ export default function Login() {
 						autoComplete="new-password"
 					/>
 					<StandardButton disabled={loginPageDisable} type="submit">
-						Entrar
+						Cadastrar
 					</StandardButton>
 				</LoginForm>
 				<StyledLink noLink={isLinkDisabled} to="/login">
