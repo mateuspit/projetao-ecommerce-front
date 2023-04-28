@@ -1,22 +1,25 @@
-// import React, { useContext } from "react";
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-// import { UserContext } from "../context/UserContext";
+import { UserContext } from "../contexts/UserContext";
 
 export default function Checkout() {
-	// const { user } = useContext(UserContext);
+	const { products } = useContext(UserContext);
 	const token = "user";
 
 	const navigate = useNavigate();
 
+	const [cardName, setCardName] = useState("");
+	const [cardNumber, setCardNumber] = useState("");
+	const [expirationDate, setExpirationDate] = useState("");
+	const [cardCVC, setCardCVC] = useState("");
+
 	const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
-	function handlepurchase() {
+	function handleSubmit() {
 		const body = {
 			products,
-			cpf,
 			cardName,
 			cardNumber,
 			expirationDate,
@@ -42,24 +45,52 @@ export default function Checkout() {
 	}
 
 	return (
-		<CheckoutContainer>
+		<Container>
 			<h1>Checkout</h1>
 			<Link to="/cart">Voltar</Link>
-			<InputContainer>
-				<Input placeholder="CPF" />
-				<Input placeholder="Nome no cartão" />
-				<Input placeholder="Número do cartão" />
+			<p>Insira os dados do cartão</p>
+			<Form onSubmit={handleSubmit}>
+				<Input
+					name="cardName"
+					type="text"
+					placeholder="Nome no cartão"
+					value={cardName}
+					onChange={(e) => setCardName(e.target.value)}
+					required
+				/>
+				<Input
+					name="cardNumber"
+					type="text"
+					placeholder="Número do cartão"
+					value={cardNumber}
+					onChange={(e) => setCardNumber(e.target.value)}
+					required
+				/>
 				<div>
-					<Input placeholder="Validade" />
-					<Input placeholder="CVC" />
+					<Input
+						name="expirationDate"
+						type="text"
+						placeholder="MM / AA"
+						value={expirationDate}
+						onChange={(e) => setExpirationDate(e.target.value)}
+						required
+					/>
+					<Input
+						name="CVV"
+						type="text"
+						placeholder="CVC"
+						value={cardCVC}
+						onChange={(e) => setCardCVC(e.target.value)}
+						required
+					/>
 				</div>
-			</InputContainer>
-			<PurchaseButton onClick={handlepurchase}>Finalizar compra</PurchaseButton>
-		</CheckoutContainer>
+				<Button type="submit">Finalizar compra</Button>
+			</Form>
+		</Container>
 	);
 }
 
-const CheckoutContainer = styled.div`
+const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -78,19 +109,17 @@ const CheckoutContainer = styled.div`
 		margin: 10px;
 	}
 `;
-const InputContainer = styled.div`
+const Form = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: start;
+	justify-content: center;
 	width: 100%;
-	max-width: 400px;
+	max-width: 500px;
 	margin: 30px;
 	box-sizing: border-box;
 	div {
 		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
 	}
 `;
 const Input = styled.input`
@@ -99,7 +128,7 @@ const Input = styled.input`
 	margin: 10px;
 	border-radius: 30px;
 `;
-const PurchaseButton = styled.button`
+const Button = styled.button`
 	position: fixed;
 	bottom: 30px;
 	width: 350px;
