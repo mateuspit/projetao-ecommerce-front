@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { UserContext } from "./contexts/UserContext";
@@ -12,10 +12,12 @@ import Checkout from "./pages/Checkout";
 import Success from "./pages/Success";
 
 export default function App() {
+	const [products, setProducts] = useState([]);
+
 	return (
 		<PagesContainer>
 			<BrowserRouter>
-				<UserContext.Provider>
+				<UserContext.Provider value={{ products, setProducts }}>
 					<Routes>
 						<Route path="/login" element={<Login />} />
 						<Route path="/signup" element={<SignUp />} />
