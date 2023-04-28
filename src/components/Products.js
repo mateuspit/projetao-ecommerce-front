@@ -31,22 +31,6 @@ export default function Products() {
 
 	useEffect(() => {
 		async function fetchProductDetails() {
-			const details = await Promise.all(
-				products.map(async (product) => {
-					const { data } = await axios.get(
-						`/api/products/${product.productID}`
-					);
-					return { ...data, qntd: product.qntd };
-				})
-			);
-			setProductDetails(details);
-		}
-
-		fetchProductDetails();
-	}, [products]);
-
-	useEffect(() => {
-		async function fetchProductDetails() {
 			try {
 				const details = await Promise.all(
 					products.map(async (product) => {
