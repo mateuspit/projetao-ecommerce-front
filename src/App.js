@@ -1,15 +1,16 @@
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
 
-import { UserContext } from "./context/UserContext"
-import Home from "./pages/Home"
-import Login from "./pages/Login"
-import SignUp from "./pages/SignUp"
-import Product from "./pages/Product"
-import Cart from "./pages/Cart"
-import Checkout from "./pages/Checkout"
-import Success from "./pages/Success"
+import { UserContext } from "./context/UserContext";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+import Product from "./pages/Product";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import Success from "./pages/Success";
 
 export default function App() {
 
@@ -29,7 +30,7 @@ export default function App() {
         </UserContext.Provider >
       </BrowserRouter >
     </PagesContainer >
-  )
+  );
 }
 
 const PagesContainer = styled.main`
