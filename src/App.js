@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
-import styled from "styled-components";
 import { UserProvider } from "./contexts/UserContext.js";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -12,25 +11,18 @@ import Success from "./pages/Success";
 
 export default function App() {
 	return (
-		<PagesContainer>
-			<BrowserRouter>
-				<UserProvider>
-					<Routes>
-						<Route path="/login" element={<Login />} />
-						<Route path="/signup" element={<SignUp />} />
-						<Route path="/" element={<Home />} />
-						<Route path="/product/:id" element={<Product />} />
-						<Route path="/cart" element={<Cart />} />
-						<Route path="/checkout" element={<Checkout />} />
-						<Route path="/success" element={<Success />} />
-					</Routes>
-				</UserProvider>
-			</BrowserRouter>
-		</PagesContainer>
+		<BrowserRouter>
+			<UserProvider>
+				<Routes>
+					<Route path="/login" element={<Login />} />
+					<Route path="/signup" element={<SignUp />} />
+					<Route path="/" element={<Home />} />
+					<Route path="/product/:id" element={<Product />} />
+					<Route path="/cart" element={<Cart />} />
+					<Route path="/checkout" element={<Checkout />} />
+					<Route path="/success" element={<Success />} />
+				</Routes>
+			</UserProvider>
+		</BrowserRouter>
 	);
 }
-
-const PagesContainer = styled.main`
-	width: 100vw;
-	height: 100vw;
-`;

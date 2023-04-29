@@ -27,12 +27,13 @@ const UserIcon = styled.div`
 `;
 
 const HeaderStyle = styled.header`
-	padding-top: 3vh;
+	overflow-y: hidden;
 	background-color: #273b51;
 	width: 100vw;
 	height: 10vh;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 `;
 
 const LogoWhite = styled.img`
