@@ -1,14 +1,15 @@
-import React, { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-import { UserContext } from "../contexts/UserContext";
 
 export default function Checkout() {
-	const { products } = useContext(UserContext);
 	const token = "user";
 
 	const navigate = useNavigate();
+	const location = useLocation();
+
+	const products = location.state?.products || [];
 
 	const [cardName, setCardName] = useState("");
 	const [cardNumber, setCardNumber] = useState("");
@@ -17,14 +18,22 @@ export default function Checkout() {
 
 	const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
+	const productsObject = products.reduce((obj, product) => {
+		obj[product._id] = product.qntd;
+		return obj;
+	}, {});
+
 	function handleSubmit() {
 		const body = {
-			products,
-			cardName,
-			cardNumber,
-			expirationDate,
-			cardCVC,
+			products: productsObject,
+			paymentData: {
+				cardName,
+				cardNumber,
+				expirationDate,
+				cardCVC,
+			},
 		};
+		console.log(body);
 
 		const config = {
 			headers: {
