@@ -59,7 +59,9 @@ export default function Login() {
 	return (
 		<>
 			<LoginStyle>
-				<LogoWhite src={logoWhite} alt="logo branca" />
+				<Link to="/login">
+					<LogoWhite src={logoWhite} alt="logo branca" />
+				</Link>
 				<LoginForm onSubmit={getSignUpData}>
 					{/*<LoginForm>*/}
 					<StandardInput
@@ -169,10 +171,10 @@ const LoginStyle = styled.body`
 const LogoWhite = styled.img`
 	height: auto;
 	width: 300px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    @media (max-width: 525px) {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	@media (max-width: 525px) {
 		width: 69vw;
-        padding-bottom: 7vh;
+		padding-bottom: 7vh;
 	}
 `;

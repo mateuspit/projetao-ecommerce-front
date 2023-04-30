@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import { Link } from "react-router-dom";
 import logoWhite from "../assets/images/logo-white-cropped.png";
 import { IoPersonCircle } from "react-icons/io5";
 import { HiOutlineMenu } from "react-icons/hi";
@@ -10,7 +11,9 @@ export default function Header() {
 			<MenuIcon>
 				<HiOutlineMenu color="white" />
 			</MenuIcon>
-			<LogoWhite src={logoWhite} alt="logo branca" />
+			<Link to="/">
+				<LogoWhite src={logoWhite} alt="logo branca" />
+			</Link>
 			<UserIcon>
 				<IoPersonCircle color="white" />
 			</UserIcon>
@@ -21,7 +24,7 @@ export default function Header() {
 const MenuIcon = styled.div`
 	margin-left: 3vw;
 	font-size: 50px;
-    @media (max-width: 525px) {
+	@media (max-width: 525px) {
 		font-size: 10vw;
 	}
 `;
@@ -29,7 +32,7 @@ const MenuIcon = styled.div`
 const UserIcon = styled.div`
 	margin-right: 3vw;
 	font-size: 50px;
-    @media (max-width: 525px) {
+	@media (max-width: 525px) {
 		font-size: 10vw;
 	}
 `;
