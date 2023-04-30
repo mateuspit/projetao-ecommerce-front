@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState, useContext } from "react";
 import React from "react";
-import logoWhite from "../assets/images/logo-white.png";
+import logoWhite from "../assets/images/logo-white-cropped.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../contexts/UserContext.js";
@@ -168,7 +168,9 @@ const LoginStyle = styled.body`
 
 const LogoWhite = styled.img`
 	height: auto;
-	width: 400px;
+	width: 300px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     @media (max-width: 525px) {
 		width: 69vw;
         padding-bottom: 7vh;
