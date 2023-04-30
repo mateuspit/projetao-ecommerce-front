@@ -133,9 +133,6 @@ const LoginStyle = styled.body`
 	flex-direction: column;
 	justify-content: start;
 	align-items: center;
-	@media (max-width: 525px) {
-		background-color: #273b51;
-	}
 `;
 
 const LogoWhite = styled.img`

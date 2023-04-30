@@ -1,6 +1,6 @@
-/* eslint-disable */
 import styled from "styled-components";
 import { useState, useContext } from "react";
+import React from "react";
 import logoWhite from "../assets/images/logo-white.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -22,7 +22,6 @@ export default function Login() {
 		setIsLinkDisabled(true);
 
 		if (password === passwordConfirm) {
-			const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 			const promise = axios.post(`${process.env.REACT_APP_API_URL}sign-up`, {
 				name,
 				email,
@@ -169,5 +168,9 @@ const LoginStyle = styled.body`
 
 const LogoWhite = styled.img`
 	height: auto;
-	width: 69vw;
+	width: 400px;
+    @media (max-width: 525px) {
+		width: 69vw;
+        padding-bottom: 7vh;
+	}
 `;
