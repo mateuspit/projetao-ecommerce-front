@@ -1,7 +1,7 @@
-/* eslint-disable */
 import styled from "styled-components";
 import { useState, useContext } from "react";
-import logoWhite from "../assets/images/logo-white.png";
+import React from "react";
+import logoWhite from "../assets/images/logo-white-cropped.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../contexts/UserContext.js";
@@ -19,7 +19,6 @@ export default function Login() {
 		setLoginPageDisable(true);
 		setIsLinkDisabled(true);
 
-		const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 		const promise = axios.post(`${process.env.REACT_APP_API_URL}sign-in`, {
 			email,
 			password,
@@ -47,38 +46,36 @@ export default function Login() {
 	}
 
 	return (
-		<>
-			<LoginStyle>
-				<LogoWhite src={logoWhite} alt="logo branca" />
-				<LoginForm onSubmit={getLoginData}>
-					{/*<LoginForm>*/}
-					<StandardInput
-						disabled={loginPageDisable}
-						required
-						type="email"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						placeholder="Email"
-					/>
-					<StandardInput
-						disabled={loginPageDisable}
-						minLength={6}
-						required
-						type="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						placeholder="Senha"
-						autoComplete="new-password"
-					/>
-					<StandardButton disabled={loginPageDisable} type="submit">
-						Entrar
-					</StandardButton>
-				</LoginForm>
-				<StyledLink noLink={isLinkDisabled} to="/signup">
-					Cadastre-se
-				</StyledLink>
-			</LoginStyle>
-		</>
+		<LoginStyle>
+			<LogoWhite src={logoWhite} alt="logo branca" />
+			<LoginForm onSubmit={getLoginData}>
+				{/*<LoginForm>*/}
+				<StandardInput
+					disabled={loginPageDisable}
+					required
+					type="email"
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+					placeholder="Email"
+				/>
+				<StandardInput
+					disabled={loginPageDisable}
+					minLength={6}
+					required
+					type="password"
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+					placeholder="Senha"
+					autoComplete="new-password"
+				/>
+				<StandardButton disabled={loginPageDisable} type="submit">
+					Entrar
+				</StandardButton>
+			</LoginForm>
+			<StyledLink noLink={isLinkDisabled} to="/signup">
+				Cadastre-se
+			</StyledLink>
+		</LoginStyle>
 	);
 }
 
@@ -140,6 +137,11 @@ const LoginStyle = styled.body`
 
 const LogoWhite = styled.img`
 	height: auto;
-	width: 69vw;
-	padding-bottom: 7vh;
+	width: 300px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+	@media (max-width: 525px) {
+		width: 69vw;
+        padding-bottom: 7vh;
+	}
 `;
