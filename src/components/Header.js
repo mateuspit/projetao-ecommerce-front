@@ -8,11 +8,11 @@ export default function Header() {
 	return (
 		<HeaderStyle>
 			<MenuIcon>
-				<HiOutlineMenu color="white" size="10vw" />
+				<HiOutlineMenu color="white" />
 			</MenuIcon>
 			<LogoWhite src={logoWhite} alt="logo branca" />
 			<UserIcon>
-				<IoPersonCircle color="white" size="10vw" />
+				<IoPersonCircle color="white" />
 			</UserIcon>
 		</HeaderStyle>
 	);
@@ -20,10 +20,18 @@ export default function Header() {
 
 const MenuIcon = styled.div`
 	margin-left: 3vw;
+	font-size: 50px;
+    @media (max-width: 525px) {
+		font-size: 10vw;
+	}
 `;
 
 const UserIcon = styled.div`
 	margin-right: 3vw;
+	font-size: 50px;
+    @media (max-width: 525px) {
+		font-size: 10vw;
+	}
 `;
 
 const HeaderStyle = styled.header`
@@ -37,6 +45,9 @@ const HeaderStyle = styled.header`
 `;
 
 const LogoWhite = styled.img`
-	height: 13vw;
+	height: 50px;
 	width: auto;
+	@media (max-width: 525px) {
+		height: 13vw;
+	}
 `;
