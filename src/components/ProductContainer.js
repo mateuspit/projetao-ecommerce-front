@@ -32,7 +32,7 @@ const ImgContainer = styled.div`
 	align-items: center;
 	img {
 		width: 200px;
-		height: auto;
+		height: 200px;
 	}
 	@media (max-width: 525px) {
 		img {
@@ -49,6 +49,7 @@ const Container = styled.div`
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	background-color: #fafafa;
 	display: flex;
+    /*max-width: 200px;*/
 	flex-direction: column;
 	margin-bottom: 30px;
 	padding: 15px;
