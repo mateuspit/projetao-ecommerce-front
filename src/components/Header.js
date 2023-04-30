@@ -4,15 +4,15 @@ import logoWhite from "../assets/images/logo-white-cropped.png";
 import { IoPersonCircle } from "react-icons/io5";
 import { HiOutlineMenu } from "react-icons/hi";
 
-export default function Header() {
+export default function Header({sideMenu}) {
 	return (
 		<HeaderStyle>
 			<MenuIcon>
-				<HiOutlineMenu color="white" size="10vw" />
+				<HiOutlineMenu color="white" size="10vw" onClick={sideMenu}/>
 			</MenuIcon>
 			<LogoWhite src={logoWhite} alt="logo branca" />
 			<UserIcon>
-				<IoPersonCircle color="white" size="10vw" />
+				<IoPersonCircle color="white" size="10vw" onClick={sideMenu}/>
 			</UserIcon>
 		</HeaderStyle>
 	);

@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import React from "react";
 
-export default function ProductContainer() {
+export default function ProductContainer({product}) {
 	return (
-		<Container>
+		<Container onClick={product}>
 			<img src="https://photos.enjoei.com.br/nargas-mini-sultan-completo-usado-poucas-vezes-83906751/828xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy82MTQ5OTkxLzhiZTc0MDk5MTFmNGRiNTY0NzE5OTU4NmFlYTNhNWVmLmpwZw" />
-			<h1>nargassssssssssssssssss</h1>
+			<h1>nargas</h1>
 			<h2>R$15</h2>
 			<h3>R$10</h3>
 		</Container>
@@ -13,6 +13,7 @@ export default function ProductContainer() {
 }
 
 const Container = styled.div`
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	background-color: #fafafa;
 	display: flex;
 	flex-direction: column;
@@ -20,7 +21,7 @@ const Container = styled.div`
 	align-items: flex-start;
 	margin-bottom: 2vh;
 	min-height: 32vh;
-	padding: 10px;
+	padding: 3%;
 	max-width: 42vw;
 	img {
 		width: 34.5vw;
@@ -28,7 +29,7 @@ const Container = styled.div`
 	}
 	h1 {
 		width: 34vw;
-        min-height: 4.5vh;
+		min-height: 4.5vh;
 		margin-top: 2vh;
 		font-size: 2.7vh;
 		font-weight: 400;
