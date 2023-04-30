@@ -5,6 +5,7 @@ import ProductContainer from "../components/ProductContainer.js";
 import { IoPersonCircle } from "react-icons/io5";
 import CartProduct from "../components/CartProduct.js";
 import { useState } from "react";
+import ProductDetail from "../components/ProductDetail.js";
 
 export default function Home() {
 	const [display, setDisplay] = useState("none");
@@ -15,13 +16,13 @@ export default function Home() {
 	}
 
 	function product() {
-		setDisplayProduct("initial");
+		setDisplayProduct("flex");
 	}
 
 	return (
 		<BigContainer display={display} displayProduct={displayProduct}>
-			<Product className="product">teste</Product>
-			<Backdiv className="product" onClick={() => setDisplayProduct("none")}/>
+			<ProductDetail />
+			<Backdiv className="product" onClick={() => setDisplayProduct("none")} />
 			<SideMenu className="slide-right">
 				<IoPersonCircle color="black" size="10vw" onClick={sideMenu} />
 				<h1>Faça Login!</h1>
@@ -39,11 +40,11 @@ export default function Home() {
 				<h1 className="title">Conheca nossos produtos ✨</h1>
 				<div className="container">
 					<ProductContainer product={product} />
-					<ProductContainer product={product}/>
-					<ProductContainer product={product}/>
-					<ProductContainer product={product}/>
-					<ProductContainer product={product}/>
-					<ProductContainer product={product}/>
+					<ProductContainer product={product} />
+					<ProductContainer product={product} />
+					<ProductContainer product={product} />
+					<ProductContainer product={product} />
+					<ProductContainer product={product} />
 				</div>
 			</Page>
 		</BigContainer>
@@ -153,18 +154,6 @@ const OpacityDiv = styled.div`
 	background-color: rgb(210, 210, 210);
 	opacity: 0.8;
 	position: absolute;
-`;
-
-const Product = styled.div`
-	position: absolute;
-	top: 7%;
-	left: 7%;
-	right: 7%;
-	border: 7%;
-	background-color: red;
-	width: 85vw;
-	height: 85vh;
-	z-index: 3;
 `;
 
 const Backdiv = styled.div`
