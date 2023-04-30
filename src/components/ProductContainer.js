@@ -9,8 +9,8 @@ export default function ProductContainer({ product, productsData }) {
 		<Container onClick={product}>
 			<img src={productsData.image} />
 			<h1>{productsData.name}</h1>
-			<h2>R$15</h2>
-			<h3>R$ {productsData.price}</h3>
+			<h2>R$ {productsData.price}</h2>
+			<h3>R$ {(productsData.price*0.9).toFixed(2)}</h3>
 		</Container>
 	);
 }
