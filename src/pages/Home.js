@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../components/Header";
 import styled from "styled-components";
 import ProductContainer from "../components/ProductContainer.js";
-import { IoPersonCircle } from "react-icons/io5";
+import { IoPersonCircle, IoCart } from "react-icons/io5";
 import CartProduct from "../components/CartProduct.js";
 import { useState } from "react";
 import ProductDetail from "../components/ProductDetail.js";
@@ -21,18 +21,29 @@ export default function Home() {
 
 	return (
 		<BigContainer display={display} displayProduct={displayProduct}>
-			<ProductDetail />
+			<ProductDetail setDisplayProduct={setDisplayProduct} />
 			<Backdiv className="product" onClick={() => setDisplayProduct("none")} />
 			<SideMenu className="slide-right">
-				<IoPersonCircle color="black" size="10vw" onClick={sideMenu} />
-				<h1>Faça Login!</h1>
+				<div className="login">
+					<IoPersonCircle color="black" onClick={sideMenu} />
+					<h1>Faça Login!</h1>
+				</div>
+				<Icon>
+					<p>Carrinho</p>
+					<IoCart color="black" />
+				</Icon>
 				<div className="cart">
 					<CartProduct />
 					<CartProduct />
 					<CartProduct />
 					<CartProduct />
 				</div>
-				<button>Finalizar Compra</button>
+				<div></div>
+				<p className="price">Total: R$100</p>
+				<div className="buttons">
+					<button>Cancelar</button>
+					<button>Comprar</button>
+				</div>
 			</SideMenu>
 			<OpacityDiv className="slide-right" onClick={() => setDisplay("none")} />
 			<Header sideMenu={sideMenu} />
@@ -121,6 +132,22 @@ const SideMenu = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	flex-direction: column;
+	p {
+		font-weight: 400;
+		font-family: "BioRhyme Expanded", cursive;
+		font-size: 1.7vh;
+	}
+	.price {
+		margin-bottom: 2vh;
+	}
+	.login {
+		font-size: 10vw;
+		display: flex;
+		align-items: center;
+		h1 {
+			margin-left: 4vw;
+		}
+	}
 	h1 {
 		font-weight: 400;
 		font-family: "BioRhyme Expanded", cursive;
@@ -132,16 +159,27 @@ const SideMenu = styled.div`
 		overflow-y: scroll;
 	}
 	button {
-		background-color: #273b51;
 		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 		border-radius: 10px;
-		width: 40vw;
+		width: 20vw;
 		height: 6vh;
 		color: white;
 		font-size: 1.2vh;
 		font-weight: 400;
 		font-family: "BioRhyme Expanded", cursive;
 		border: 0;
+	}
+	.buttons {
+		width: 45vw;
+		display: flex;
+		justify-content: space-between;
+		button:nth-child(1) {
+			color: black;
+			background-color: #d9d9d9;
+		}
+		button:nth-child(2) {
+			background-color: #273b51;
+		}
 	}
 `;
 
@@ -165,4 +203,10 @@ const Backdiv = styled.div`
 	background-color: rgb(210, 210, 210);
 	opacity: 0.8;
 	position: absolute;
+`;
+
+const Icon = styled.div`
+	font-size: 5vh;
+	display: flex;
+	align-items: center;
 `;

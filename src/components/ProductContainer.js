@@ -23,6 +23,7 @@ const Container = styled.div`
 	min-height: 32vh;
 	padding: 3%;
 	max-width: 42vw;
+	font-weight: 400;
 	img {
 		width: 34.5vw;
 		height: 13vh;
@@ -30,9 +31,7 @@ const Container = styled.div`
 	h1 {
 		width: 34vw;
 		min-height: 4.5vh;
-		margin-top: 2vh;
 		font-size: 2.7vh;
-		font-weight: 400;
 		font-family: "Indie Flower", cursive;
 		text-align: left;
 		overflow: hidden;
@@ -41,19 +40,16 @@ const Container = styled.div`
 	}
 	h2 {
 		color: red;
+		margin-top: -2vh;
 		text-decoration-line: line-through;
-		margin-top: 1.6vh;
 		font-size: 1.1vh;
 		font-family: "BioRhyme Expanded", cursive;
-		font-weight: 400;
 		text-align: left;
 	}
 	h3 {
 		color: green;
-		margin-top: 0.6vh;
 		font-size: 1.4vh;
 		font-family: "BioRhyme Expanded", cursive;
-		font-weight: 400;
 		text-align: left;
 	}
 `;

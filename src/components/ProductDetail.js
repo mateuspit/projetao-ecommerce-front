@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { IoCart } from "react-icons/io5";
 
-export default function ProductDetail() {
+export default function ProductDetail({ setDisplayProduct }) {
 	return (
 		<Product className="product">
+			<p onClick={() => setDisplayProduct("none")}>X</p>
 			<img src="https://photos.enjoei.com.br/nargas-mini-sultan-completo-usado-poucas-vezes-83906751/828xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy82MTQ5OTkxLzhiZTc0MDk5MTFmNGRiNTY0NzE5OTU4NmFlYTNhNWVmLmpwZw" />
 			<h1 className="text">nargas</h1>
 			<h2 className="">
@@ -20,7 +22,11 @@ export default function ProductDetail() {
 			</h2>
 			<h3>R$ 20</h3>
 			<h4>+ 2 -</h4>
-			<button>Adicionar ao carrinho</button>
+
+			<div className="botao">
+				<h5>Adicionar ao carrinho</h5>
+				<IoCart color="white" />
+			</div>
 		</Product>
 	);
 }
@@ -39,6 +45,13 @@ const Product = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+	font-weight: 400;
+	p {
+		position: absolute;
+		top: 3%;
+		right: 6%;
+		cursor: pointer;
+	}
 	.text {
 		overflow: hidden;
 		white-space: nowrap;
@@ -49,41 +62,42 @@ const Product = styled.div`
 		height: 23vh;
 	}
 	h1 {
-		font-weight: 400;
 		font-family: "Indie Flower", cursive;
 		font-size: 5.5vh;
 		min-height: 7vh;
 	}
 	h2 {
-		font-weight: 400;
 		font-family: "Indie Flower", cursive;
 		font-size: 1.7vh;
-		background-color: red;
 		max-height: 18vh;
 		overflow-y: scroll;
-        line-height: 2.1vh;
-        text-align: justify;
+		line-height: 2.1vh;
+		text-align: justify;
 	}
 	h3 {
-		font-weight: 400;
 		font-family: "BioRhyme Expanded", cursive;
 		color: green;
 		font-size: 2vh;
 	}
 	h4 {
-		font-weight: 400;
 		font-family: "BioRhyme Expanded", cursive;
 		font-size: 1.7vh;
 	}
-	button {
-		border: 0;
+	.botao {
 		background-color: #273b51;
-		font-size: 1.2vh;
-		font-weight: 400;
+		font-size: 7vw;
 		font-family: "BioRhyme Expanded", cursive;
 		color: white;
 		border-radius: 10px;
 		width: 63vw;
 		height: 6vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		h5 {
+			font-size: 1.2vh;
+			color: white;
+			margin-right: 2vw;
+		}
 	}
 `;
