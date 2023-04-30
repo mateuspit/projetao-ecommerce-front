@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import styled from "styled-components";
 import ProductContainer from "../components/ProductContainer.js";
 import { IoPersonCircle, IoCart } from "react-icons/io5";
 import CartProduct from "../components/CartProduct.js";
-import { useState } from "react";
 import ProductDetail from "../components/ProductDetail.js";
+import axios from "axios";
 
 export default function Home() {
 	const [display, setDisplay] = useState("none");
 	const [displayProduct, setDisplayProduct] = useState("none");
+	const [randomProducts, setRandomProducts] = useState([]);
+
+	useEffect(() => {
+		const promise = axios.get(`${process.env.REACT_APP_API_URL}products`);
+
+		promise.then((res) => {
+			console.log(res.data[0].name);
+			setRandomProducts(res.data);
+			console.log(randomProducts);
+		});
+
+		promise.catch((res) => {
+			console.log("catch");
+			alert(res);
+		});
+	}, []);
 
 	function sideMenu() {
 		setDisplay("flex");
@@ -33,6 +49,9 @@ export default function Home() {
 					<IoCart color="black" />
 				</Icon>
 				<div className="cart">
+					{/*{randomProducts.map((rp) => (
+						<CartProduct key={rp._id} productsData={randomProducts}/>
+					))}*/}
 					<CartProduct />
 					<CartProduct />
 					<CartProduct />
@@ -50,12 +69,18 @@ export default function Home() {
 			<Page>
 				<h1 className="title">Conheca nossos produtos ✨</h1>
 				<div className="container">
+					{randomProducts.map((rp) => (
+						<ProductContainer
+							key={rp._id}
+							product={product}
+							productsData={rp}
+						/>
+					))}
+					{/*<ProductContainer product={product} />
 					<ProductContainer product={product} />
 					<ProductContainer product={product} />
 					<ProductContainer product={product} />
-					<ProductContainer product={product} />
-					<ProductContainer product={product} />
-					<ProductContainer product={product} />
+					<ProductContainer product={product} />*/}
 				</div>
 			</Page>
 		</BigContainer>
@@ -72,7 +97,7 @@ const Page = styled.div`
 	.title {
 		margin-top: 3vh;
 		font-size: 4.5vh;
-		font-family: "Oldenburg", cursive;
+		/*font-family: "Oldenburg", cursive;*/
 		text-align: center;
 	}
 	.container {
@@ -150,7 +175,7 @@ const SideMenu = styled.div`
 	}
 	h1 {
 		font-weight: 400;
-		font-family: "BioRhyme Expanded", cursive;
+		/*font-family: "BioRhyme Expanded", cursive;*/
 		font-size: 1.7vh;
 		margin-bottom: 1vh;
 	}
@@ -166,7 +191,7 @@ const SideMenu = styled.div`
 		color: white;
 		font-size: 1.2vh;
 		font-weight: 400;
-		font-family: "BioRhyme Expanded", cursive;
+		/*font-family: "BioRhyme Expanded", cursive;*/
 		border: 0;
 	}
 	.buttons {
