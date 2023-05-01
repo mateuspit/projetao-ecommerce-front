@@ -55,9 +55,6 @@ const Container = styled.div`
 	padding: 15px;
 	h1 {
 		width: 100%;
-		min-height: 4.5vh;
-		font-size: 2.7vh;
-		font-weight: 400;
 		text-align: left;
 		overflow: hidden;
 		white-space: nowrap;
@@ -67,7 +64,6 @@ const Container = styled.div`
 		color: red;
 		text-decoration-line: line-through;
 		font-size: 13px;
-		margin-top: -13px;
         margin-bottom: 10px;
 		/*font-family: "BioRhyme Expanded", cursive;*/
 		text-align: left;

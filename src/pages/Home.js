@@ -6,11 +6,13 @@ import { IoPersonCircle, IoCart } from "react-icons/io5";
 import CartProduct from "../components/CartProduct.js";
 import ProductDetail from "../components/ProductDetail.js";
 import axios from "axios";
+import ReactLoading from "react-loading";
 
 export default function Home() {
 	const [display, setDisplay] = useState("none");
 	const [displayProduct, setDisplayProduct] = useState("none");
 	const [randomProducts, setRandomProducts] = useState([]);
+	const [homeProductsReady, setHomeProductsReady] = useState(false);
 
 	useEffect(() => {
 		const promise = axios.get(`${process.env.REACT_APP_API_URL}products`);
@@ -19,11 +21,13 @@ export default function Home() {
 			console.log(res.data[0].name);
 			setRandomProducts(res.data);
 			console.log(randomProducts);
+			setHomeProductsReady(true);
 		});
 
 		promise.catch((res) => {
 			console.log("catch");
 			alert(res);
+			setHomeProductsReady(false);
 		});
 	}, []);
 
@@ -35,58 +39,95 @@ export default function Home() {
 		setDisplayProduct("flex");
 	}
 
-	return (
-		<BigContainer display={display} displayProduct={displayProduct}>
-			<ProductDetail setDisplayProduct={setDisplayProduct} />
-			<Backdiv className="product" onClick={() => setDisplayProduct("none")} />
-			<SideMenu className="slide-right">
-				<div className="login">
-					<IoPersonCircle color="black" onClick={sideMenu} />
-					<h1>Faça Login!</h1>
-				</div>
-				<Icon>
-					<p>Carrinho</p>
-					<IoCart color="black" />
-				</Icon>
-				<div className="cart">
-					{/*{randomProducts.map((rp) => (
-						<CartProduct key={rp._id} productsData={randomProducts}/>
-					))}*/}
-					<CartProduct />
-					<CartProduct />
-					<CartProduct />
-					<CartProduct />
-				</div>
-				<div></div>
-				<p className="price">Total: R$100</p>
-				<div className="buttons">
-					<button>Cancelar</button>
-					<button>Comprar</button>
-				</div>
-			</SideMenu>
-			<OpacityDiv className="slide-right" onClick={() => setDisplay("none")} />
-			<Header sideMenu={sideMenu} />
-			<Page>
-				<h1 className="title">Conheca nossos produtos ✨</h1>
-				<div className="container">
-					{randomProducts.map((rp) => (
-						<ProductContainer
-							key={rp._id}
-							product={product}
-							productsData={rp}
-						/>
-					))}
-					{/*<ProductContainer product={product} />
-					<ProductContainer product={product} />
-					<ProductContainer product={product} />
-					<ProductContainer product={product} />
-					<ProductContainer product={product} />*/}
-				</div>
-			</Page>
-		</BigContainer>
-	);
+	if (homeProductsReady) {
+		return (
+			<BigContainer display={display} displayProduct={displayProduct}>
+				{/*<ProductDetail
+					setDisplayProduct={setDisplayProduct}
+					productsData={randomProducts}
+				/>*/}
+				{randomProducts.map((rp) => (
+					<ProductDetail
+						key={rp._id}
+						setDisplayProduct={setDisplayProduct}
+						productsData={rp}
+					/>
+				))}
+				<Backdiv
+					className="product"
+					onClick={() => setDisplayProduct("none")}
+				/>
+				<SideMenu className="slide-right">
+					<div className="login">
+						<IoPersonCircle color="black" onClick={sideMenu} />
+						<h1>Faça Login!</h1>
+					</div>
+					<Icon>
+						<p>Carrinho</p>
+						<IoCart color="black" />
+					</Icon>
+					<div className="cart">
+						<CartProduct />
+						<CartProduct />
+						<CartProduct />
+						<CartProduct />
+						<CartProduct />
+						<CartProduct />
+					</div>
+					<div></div>
+					<p className="price">Total: R$100</p>
+					<div className="buttons">
+						<button>Cancelar</button>
+						<button>Comprar</button>
+					</div>
+				</SideMenu>
+				<OpacityDiv
+					className="slide-right"
+					onClick={() => setDisplay("none")}
+				/>
+				<Header sideMenu={sideMenu} />
+				<Page>
+					<h1 className="title">Conheca nossos produtos ✨</h1>
+					<div className="container">
+						{randomProducts.map((rp) => (
+							<ProductContainer
+								key={rp._id}
+								product={product}
+								productsData={rp}
+							/>
+						))}
+					</div>
+				</Page>
+			</BigContainer>
+		);
+	} else {
+		return (
+			<>
+				<Header sideMenu={sideMenu} />
+				<LoadingText>Carregando produtos!</LoadingText>
+				<LoadingGif>
+					<ReactLoading type="spin" color="#af7014" width={200} />
+				</LoadingGif>
+			</>
+		);
+	}
 }
 
+const LoadingText = styled.p`
+	color: #af7014;
+	font-size: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 50px;
+`;
+
+const LoadingGif = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 150px;
+`;
 const Page = styled.div`
 	background-color: rgb(240, 240, 240);
 	display: flex;
@@ -159,7 +200,7 @@ const SideMenu = styled.div`
 	flex-direction: column;
 	p {
 		font-weight: 400;
-		font-family: "BioRhyme Expanded", cursive;
+		/*font-family: "BioRhyme Expanded", cursive;*/
 		font-size: 1.7vh;
 	}
 	.price {
@@ -203,7 +244,7 @@ const SideMenu = styled.div`
 			background-color: #d9d9d9;
 		}
 		button:nth-child(2) {
-			background-color: #273b51;
+			background-color: #af7014;
 		}
 	}
 `;

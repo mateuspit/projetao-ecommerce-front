@@ -1,35 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { IoCart } from "react-icons/io5";
 
-export default function ProductDetail({ setDisplayProduct }) {
+export default function ProductDetail({ setDisplayProduct, productsData }) {
+	useEffect(() => {
+		console.log("no creio", productsData);
+		console.log(productsData.image);
+	}, []);
 	return (
 		<Product className="product">
 			<p onClick={() => setDisplayProduct("none")}>X</p>
-			<img src="https://photos.enjoei.com.br/nargas-mini-sultan-completo-usado-poucas-vezes-83906751/828xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy82MTQ5OTkxLzhiZTc0MDk5MTFmNGRiNTY0NzE5OTU4NmFlYTNhNWVmLmpwZw" />
-			<h1 className="text">nargas</h1>
-			<h2 className="">
-				Um narguilé (também conhecido como cachimbo d'água, hookah, shisha ou
-				arguile) é um dispositivo utilizado para fumar tabaco aromatizado ou
-				outras substâncias, que é comum em muitas culturas do Oriente Médio e do
-				Sul da Ásia. O narguilé é composto por uma base com água, um tubo
-				vertical com um prato na parte superior para colocar o tabaco, um
-				fornilho para aquecer o tabaco, uma mangueira para fumar e uma boquilha
-				para inalar a fumaça. A fumaça é filtrada pela água na base, tornando-a
-				mais suave do que a fumaça de um cigarro tradicional. O uso do narguilé
-				é frequentemente associado à socialização e à cultura de cafés em países
-				como Egito, Turquia, Líbano e Índia.
-			</h2>
-			<h3>R$ 20</h3>
+			<img src={productsData.image} />
+			<h1 className="text">{productsData.name}</h1>
+			<h2 className="">{productsData.description}</h2>
+			<h3>R$ {(productsData.price*0.9).toFixed(2)}</h3>
 			<h4>+ 2 -</h4>
 
-			<div className="botao">
+			<StandardButton>
 				<h5>Adicionar ao carrinho</h5>
 				<IoCart color="white" />
-			</div>
+			</StandardButton>
 		</Product>
 	);
 }
+
+const StandardButton = styled.button`
+	background-color: #af7014; /* cor de fundo do botão */
+	border: none; /* remove a borda do botão */
+	color: white; /* cor do texto do botão */
+	padding: 10px 20px; /* espaço interno do botão */
+	text-align: center; /* alinhamento do texto */
+	text-decoration: none; /* remove a decoração de link */
+	display: inline-block; /* permite que outros elementos fiquem ao lado do botão */
+	font-size: 16px; /* tamanho da fonte */
+	border-radius: 5px; /* curvatura dos cantos */
+	cursor: pointer; /* cursor ao passar por cima do botão */
+	margin-bottom: 2vh;
+`;
 
 const Product = styled.div`
 	position: absolute;
@@ -62,12 +69,12 @@ const Product = styled.div`
 		height: 23vh;
 	}
 	h1 {
-		font-family: "Indie Flower", cursive;
+		/*font-family: "Indie Flower", cursive;*/
 		font-size: 5.5vh;
 		min-height: 7vh;
 	}
 	h2 {
-		font-family: "Indie Flower", cursive;
+		/*font-family: "Indie Flower", cursive;*/
 		font-size: 1.7vh;
 		max-height: 18vh;
 		overflow-y: scroll;
@@ -75,18 +82,18 @@ const Product = styled.div`
 		text-align: justify;
 	}
 	h3 {
-		font-family: "BioRhyme Expanded", cursive;
+		/*font-family: "BioRhyme Expanded", cursive;*/
 		color: green;
 		font-size: 2vh;
 	}
 	h4 {
-		font-family: "BioRhyme Expanded", cursive;
+		/*font-family: "BioRhyme Expanded", cursive;*/
 		font-size: 1.7vh;
 	}
 	.botao {
 		background-color: #273b51;
 		font-size: 7vw;
-		font-family: "BioRhyme Expanded", cursive;
+		/*font-family: "BioRhyme Expanded", cursive;*/
 		color: white;
 		border-radius: 10px;
 		width: 63vw;

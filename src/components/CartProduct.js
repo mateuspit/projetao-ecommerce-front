@@ -25,7 +25,7 @@ const Container = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	padding: 1.3rem;
-	font-family: "BioRhyme Expanded", cursive;
+	/*font-family: "BioRhyme Expanded", cursive;*/
 	font-weight: 400;
 	font-size: 1.5vh;
 	img {
@@ -36,7 +36,7 @@ const Container = styled.div`
 		top: 6%;
 		right: 4.5%;
 		position: absolute;
-		font-family: "Oldenburg", cursive;
+		/*font-family: "Oldenburg", cursive;*/
 	}
 	h2 {
 		color: green;
