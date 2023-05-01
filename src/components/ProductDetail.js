@@ -1,22 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { IoCart } from "react-icons/io5";
 
-export default function ProductDetail({ setDisplayProduct, productsData }) {
-	//useEffect(() => {
-	//	console.log("no creio", productsData);
-	//	console.log(productsData.image);
-	//}, []);
+export default function ProductDetail({
+	setDisplayProduct,
+	productsData,
+	setCartData,
+	cartData,
+}) {
+	const [amount, setAmount] = useState(0);
+
 	return (
 		<Product className="product">
 			<p onClick={() => setDisplayProduct("none")}>X</p>
-			<img src={productsData.image} />
-			<h1 className="text">{productsData.name}</h1>
-			<h2 className="">{productsData.description}</h2>
-			<h3>R$ {(productsData.price * 0.9).toFixed(2)}</h3>
-			<h4>+ 2 -</h4>
+			<img src={productsData?.image} />
+			<h1>{productsData?.name}</h1>
+			<h2>{productsData?.description}</h2>
+			<h3>R$ {(productsData?.price * 0.9).toFixed(2)}</h3>
+			<div className="quantity">
+				<h1 onClick={() => setAmount(amount + 1)}>+</h1>
+				<h2>{amount}</h2>
+				<h3
+					onClick={() => {
+						if (amount > 0) setAmount(amount - 1);
+					}}
+				>
+					-
+				</h3>
+			</div>
 
-			<StandardButton>
+			<StandardButton
+				onClick={() => {
+					setCartData([
+						...cartData,
+						{
+							name: productsData.name,
+							price: productsData.price,
+							_id: productsData._id,
+							amount,
+						},
+					]);
+					console.log([
+						...cartData,
+						{
+							name: productsData.name,
+							price: productsData.price,
+							_id: productsData._id,
+							amount,
+						},
+					]);
+				}}
+			>
 				<h5>Adicionar ao carrinho</h5>
 				<IoCart color="white" />
 			</StandardButton>
@@ -32,10 +66,19 @@ const StandardButton = styled.button`
 	text-align: center; /* alinhamento do texto */
 	text-decoration: none; /* remove a decoração de link */
 	display: inline-block; /* permite que outros elementos fiquem ao lado do botão */
-	font-size: 16px; /* tamanho da fonte */
+	font-size: 4vw; /* tamanho da fonte */
 	border-radius: 5px; /* curvatura dos cantos */
 	cursor: pointer; /* cursor ao passar por cima do botão */
-	margin-bottom: 2vh;
+	display: flex;
+	align-items: center;
+	width: 63vw;
+	height: 6vh;
+	justify-content: center;
+	h5 {
+		font-size: 1.7vh;
+		color: white;
+		margin-right: 2vw;
+	}
 `;
 
 const Product = styled.div`
@@ -48,63 +91,47 @@ const Product = styled.div`
 	width: 85vw;
 	height: 85vh;
 	z-index: 3;
-	padding: 3rem;
+	padding: 2rem;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	font-weight: 400;
+	.quantity {
+		display: flex;
+		width: 15vw;
+		max-height: 2vh;
+		justify-content: space-between;
+		h1,
+		h2,
+		h3 {
+			font-size: 2vh;
+			color: black;
+			cursor: pointer;
+		}
+	}
 	p {
 		position: absolute;
 		top: 3%;
 		right: 6%;
 		cursor: pointer;
 	}
-	.text {
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-	}
 	img {
 		width: 60vw;
 		height: 23vh;
 	}
 	h1 {
-		/*font-family: "Indie Flower", cursive;*/
-		font-size: 5.5vh;
-		min-height: 7vh;
+		font-size: 3vh;
+		min-height: 12vh;
+		overflow-x: scroll;
 	}
 	h2 {
-		/*font-family: "Indie Flower", cursive;*/
 		font-size: 1.7vh;
-		max-height: 18vh;
+		max-height: 19vh;
 		overflow-y: scroll;
 		line-height: 2.1vh;
 		text-align: justify;
 	}
 	h3 {
-		/*font-family: "BioRhyme Expanded", cursive;*/
 		color: green;
 		font-size: 2vh;
-	}
-	h4 {
-		/*font-family: "BioRhyme Expanded", cursive;*/
-		font-size: 1.7vh;
-	}
-	.botao {
-		background-color: #273b51;
-		font-size: 7vw;
-		/*font-family: "BioRhyme Expanded", cursive;*/
-		color: white;
-		border-radius: 10px;
-		width: 63vw;
-		height: 6vh;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		h5 {
-			font-size: 1.2vh;
-			color: white;
-			margin-right: 2vw;
-		}
 	}
 `;

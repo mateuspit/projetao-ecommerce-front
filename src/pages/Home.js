@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Header from "../components/Header";
 import styled from "styled-components";
 import ProductContainer from "../components/ProductContainer.js";
@@ -7,24 +7,25 @@ import CartProduct from "../components/CartProduct.js";
 import ProductDetail from "../components/ProductDetail.js";
 import axios from "axios";
 import ReactLoading from "react-loading";
+import { UserContext } from "../contexts/UserContext.js";
 
 export default function Home() {
 	const [display, setDisplay] = useState("none");
 	const [displayProduct, setDisplayProduct] = useState("none");
 	const [randomProducts, setRandomProducts] = useState([]);
 	const [homeProductsReady, setHomeProductsReady] = useState(false);
+	const [dataProduct, setDataProduct] = useState();
+	const { setCardData, cartData } = useContext(UserContext);
 
 	useEffect(() => {
 		const promise = axios.get(`${process.env.REACT_APP_API_URL}products`);
-
-		promise.then((res) => {
+		
+		promise.then((res) => {	
 			setRandomProducts(res.data);
-			console.log(res.data);
 			setHomeProductsReady(true);
 		});
 
 		promise.catch((res) => {
-			console.log("catch");
 			alert(res);
 			setHomeProductsReady(false);
 		});
@@ -34,24 +35,20 @@ export default function Home() {
 		setDisplay("flex");
 	}
 
-	function product() {
+	function showProduct(data) {
 		setDisplayProduct("flex");
+		setDataProduct(data);
 	}
 
 	if (homeProductsReady) {
 		return (
 			<BigContainer display={display} displayProduct={displayProduct}>
-				{/*<ProductDetail
+				<ProductDetail
 					setDisplayProduct={setDisplayProduct}
-					productsData={randomProducts}
-				/>*/}
-				{randomProducts.map((rp) => (
-					<ProductDetail
-						key={rp._id}
-						setDisplayProduct={setDisplayProduct}
-						productsData={rp}
-					/>
-				))}
+					productsData={dataProduct}
+					setCartData={setCardData}
+					cartData={cartData}
+				/>
 				<Backdiv
 					className="product"
 					onClick={() => setDisplayProduct("none")}
@@ -91,8 +88,8 @@ export default function Home() {
 						{randomProducts.map((rp) => (
 							<ProductContainer
 								key={rp._id}
-								product={product}
 								productsData={rp}
+								showProduct={showProduct}
 							/>
 						))}
 					</div>
@@ -137,7 +134,6 @@ const Page = styled.div`
 	.title {
 		margin-top: 3vh;
 		font-size: 4.5vh;
-		/*font-family: "Oldenburg", cursive;*/
 		text-align: center;
 	}
 	.container {
@@ -147,7 +143,7 @@ const Page = styled.div`
 		overflow-y: scroll;
 		justify-content: space-between;
 		height: 67vh;
-		width: 84.6vw;
+		width: 87vw;
 	}
 `;
 
@@ -198,8 +194,6 @@ const SideMenu = styled.div`
 	justify-content: space-between;
 	flex-direction: column;
 	p {
-		font-weight: 400;
-		/*font-family: "BioRhyme Expanded", cursive;*/
 		font-size: 1.7vh;
 	}
 	.price {
@@ -214,8 +208,6 @@ const SideMenu = styled.div`
 		}
 	}
 	h1 {
-		font-weight: 400;
-		/*font-family: "BioRhyme Expanded", cursive;*/
 		font-size: 1.7vh;
 		margin-bottom: 1vh;
 	}
@@ -230,8 +222,6 @@ const SideMenu = styled.div`
 		height: 6vh;
 		color: white;
 		font-size: 1.2vh;
-		font-weight: 400;
-		/*font-family: "BioRhyme Expanded", cursive;*/
 		border: 0;
 	}
 	.buttons {
