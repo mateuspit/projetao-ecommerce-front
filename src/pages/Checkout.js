@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import { IoChevronBack } from "react-icons/io5";
 
 export default function Checkout() {
 	const token = "user";
@@ -55,9 +56,15 @@ export default function Checkout() {
 
 	return (
 		<Container>
-			<h1>Checkout</h1>
-			<Link to="/cart">Voltar</Link>
-			<p>Insira os dados do cartão</p>
+			<ContainerHeader>
+				<h1>Checkout</h1>
+				<Link to="/cart">
+					<Icon>
+						<IoChevronBack />
+					</Icon>
+				</Link>
+			</ContainerHeader>
+			<p>Insira os dados do cartão de crédito</p>
 			<Form onSubmit={handleSubmit}>
 				<Input
 					name="cardName"
@@ -83,6 +90,7 @@ export default function Checkout() {
 						value={expirationDate}
 						onChange={(e) => setExpirationDate(e.target.value)}
 						required
+						className="smallerInput"
 					/>
 					<Input
 						name="CVV"
@@ -108,14 +116,28 @@ const Container = styled.div`
 	height: 100vh;
 	padding: 30px 20px;
 	box-sizing: border-box;
-	h1 {
-		margin-bottom: 30px;
-		font-size: 32px;
+	background-color: #f5f5f5;
+	p {
+		margin-top: 100px;
+		margin-bottom: 15px;
+		font-size: 22px;
 	}
-	a {
-		color: blue;
-		font-size: 18px;
-		margin: 10px;
+`;
+const ContainerHeader = styled.header`
+	display: flex;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 80px;
+	padding: 0 30px;
+	box-sizing: border-box;
+	align-items: center;
+	justify-content: center;
+	background-color: #273b51;
+	h1 {
+		color: #ffffff;
+		font-size: 36px;
 	}
 `;
 const Form = styled.div`
@@ -124,18 +146,27 @@ const Form = styled.div`
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	max-width: 500px;
+	max-width: 400px;
 	margin: 30px;
 	box-sizing: border-box;
 	div {
 		display: flex;
+		width: 100%;
+	}
+	.smallerInput {
+		margin-right: 15px;
 	}
 `;
 const Input = styled.input`
+	display: flex;
 	width: 100%;
-	height: 40px;
-	margin: 10px;
-	border-radius: 30px;
+	height: 45px;
+	margin-bottom: 15px;
+	padding: 0 10px;
+	flex-wrap: nowrap;
+	border: 0.5px solid;
+	border-radius: 8px;
+	box-sizing: border-box;
 `;
 const Button = styled.button`
 	position: fixed;
@@ -144,5 +175,14 @@ const Button = styled.button`
 	height: 50px;
 	border-radius: 30px;
 	border: none;
+	background-color: #af7014;
+	color: #ffffff;
 	font-size: 20px;
+`;
+const Icon = styled.div`
+	color: #ffffff;
+	font-size: 40px;
+	position: absolute;
+	top: 20px;
+	left: 20px;
 `;
