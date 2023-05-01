@@ -1,5 +1,4 @@
-/* eslint-disable */
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { IoChevronBack } from "react-icons/io5";
 import { Link } from "react-router-dom";
@@ -55,15 +54,17 @@ export default function Success() {
 	let total = 0;
 	return (
 		<SuccessContainer>
-			<Link to="/checkout">
-				<Icon>
-					<IoChevronBack color="#273b51" />
-				</Icon>
-			</Link>
-			<SuccessTitle>
-				Compra concluída
-				<p>com sucesso!</p>
-			</SuccessTitle>
+			<Header>
+				<Link to="/checkout">
+					<Icon>
+						<IoChevronBack color="#af7014" />
+					</Icon>
+				</Link>
+				<SuccessTitle>
+					Compra concluída
+					<p>com sucesso!</p>
+				</SuccessTitle>
+			</Header>
 			<ClienteName>
 				<h4>Nome do cliente:</h4>
 				<p>{purchaseData.paymentInfo.cardName}</p>
@@ -78,7 +79,7 @@ export default function Success() {
 			{purchaseData.products.map((p) => {
 				total += p.amount * p.price;
 				return (
-					<ProductsList>
+					<ProductsList key={p._id}>
 						<Product>{p.name}</Product>
 						<p>{p.amount}</p>
 						<p>{p.price}</p>
@@ -96,6 +97,9 @@ export default function Success() {
 		</SuccessContainer>
 	);
 }
+const Header = styled.header`
+    background-color: #273b51;
+`;
 
 const Icon = styled.div`
 	font-size: 40px;
@@ -111,6 +115,7 @@ const ClienteName = styled.div`
 	line-height: 4vh;
 	margin-left: 5vw;
 	margin-bottom: 3vh;
+    margin-top: 2vh;
 	p {
 		color: #273b51;
 	}
@@ -175,7 +180,7 @@ const ProductsList = styled.div`
 `;
 
 const SuccessTitle = styled.h1`
-	color: #af7014;
+	color: white;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
