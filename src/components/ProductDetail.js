@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { IoCart } from "react-icons/io5";
 
 export default function ProductDetail({ setDisplayProduct, productsData }) {
-	useEffect(() => {
-		console.log("no creio", productsData);
-		console.log(productsData.image);
-	}, []);
+	//useEffect(() => {
+	//	console.log("no creio", productsData);
+	//	console.log(productsData.image);
+	//}, []);
 	return (
 		<Product className="product">
 			<p onClick={() => setDisplayProduct("none")}>X</p>
 			<img src={productsData.image} />
 			<h1 className="text">{productsData.name}</h1>
 			<h2 className="">{productsData.description}</h2>
-			<h3>R$ {(productsData.price*0.9).toFixed(2)}</h3>
+			<h3>R$ {(productsData.price * 0.9).toFixed(2)}</h3>
 			<h4>+ 2 -</h4>
 
 			<StandardButton>

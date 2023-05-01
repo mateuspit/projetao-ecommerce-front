@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import React, { useEffect } from "react";
+import React from "react";
 
 export default function ProductContainer({ product, productsData }) {
-	useEffect(() => {
-		console.log(productsData);
-	}, []);
+	//useEffect(() => {
+	//	console.log(productsData);
+	//}, []);
 	return (
 		<Container onClick={product}>
 			<ImgContainer>
@@ -49,7 +49,7 @@ const Container = styled.div`
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	background-color: #fafafa;
 	display: flex;
-    /*max-width: 200px;*/
+	/*max-width: 200px;*/
 	flex-direction: column;
 	margin-bottom: 30px;
 	padding: 15px;
@@ -64,7 +64,7 @@ const Container = styled.div`
 		color: red;
 		text-decoration-line: line-through;
 		font-size: 13px;
-        margin-bottom: 10px;
+		margin-bottom: 10px;
 		/*font-family: "BioRhyme Expanded", cursive;*/
 		text-align: left;
 	}
