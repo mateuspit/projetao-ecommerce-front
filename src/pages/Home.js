@@ -18,9 +18,8 @@ export default function Home() {
 		const promise = axios.get(`${process.env.REACT_APP_API_URL}products`);
 
 		promise.then((res) => {
-			console.log(res.data[0].name);
 			setRandomProducts(res.data);
-			console.log(randomProducts);
+			console.log(res.data);
 			setHomeProductsReady(true);
 		});
 
