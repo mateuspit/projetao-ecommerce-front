@@ -57,7 +57,7 @@ export default function Success() {
 			<Header>
 				<Link to="/checkout">
 					<Icon>
-						<IoChevronBack color="#af7014" />
+						<IoChevronBack color="WHITE" />
 					</Icon>
 				</Link>
 				<SuccessTitle>
