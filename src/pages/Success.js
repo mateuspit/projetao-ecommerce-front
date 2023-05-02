@@ -14,7 +14,8 @@ export default function Success() {
 
 	let total = 0;
 	console.log(products);
-	if (products.lenght !== 0) {
+	console.log(products.length !== 0);
+	if (products.length !== 0) {
 		return (
 			<SuccessContainer>
 				<Header>
