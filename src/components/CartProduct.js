@@ -2,21 +2,21 @@ import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { UserContext } from "../contexts/UserContext.js";
 
-export default function CartProduct({
-	productsData,
-	updateCartAmount,
-}) {
+export default function CartProduct({ productsData, updateCartAmount }) {
 	const { cartImage } = useContext(UserContext);
 	const [cartAmount, setCartAmount] = useState(productsData.amount);
-
 
 	useEffect(() => {
 		updateCartAmount(productsData._id, cartAmount);
 	}, [cartAmount]);
 
+	const productImage = cartImage.find(
+		(product) => product._id === productsData._id
+	).image;
+
 	return (
 		<Container>
-			<img src={cartImage} />
+			<img src={productImage} />
 			<p>X</p>
 			<h1>{productsData?.name}</h1>
 			<h3>R$ {(productsData?.price * 0.9).toFixed(2)}</h3>

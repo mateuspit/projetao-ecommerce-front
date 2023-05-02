@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, {  useContext } from "react";
 import styled from "styled-components";
 import { IoCart } from "react-icons/io5";
 import { UserContext } from "../contexts/UserContext.js";
@@ -12,7 +12,6 @@ export default function ProductDetail({
 	setAmount,
 }) {
 	const { cartImage, setCartImage } = useContext(UserContext);
-	const [amount, setAmount] = useState(0);
 	console.log();
 	function handleAddCart() {
 		if (amount > 0) {

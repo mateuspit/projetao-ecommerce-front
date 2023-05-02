@@ -55,11 +55,6 @@ export default function Home() {
 		);
 	}
 
-	// function findProductImage(productId) {
-	// 	const product = randomProducts.find((product) => product._id === productId);
-	// 	return product?.image;
-	// }
-
 	function calculateTotal() {
 		return cartData.reduce((total, product) => {
 			return total + product.price * product.amount;
