@@ -2,10 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { UserContext } from "../contexts/UserContext.js";
 
-export default function CartProduct({
-	productsData,
-	updateCartAmount,
-}) {
+export default function CartProduct({ productsData, updateCartAmount }) {
 	const { cartImage, cartData } = useContext(UserContext);
 
 	const productImage = cartImage.find(
@@ -22,11 +19,18 @@ export default function CartProduct({
 			<h1>{productsData?.name}</h1>
 			<h3>R$ {(productsData?.price * 0.9).toFixed(2)}</h3>
 			<div className="quantity">
-				<h1 onClick={() => updateCartAmount(productsData._id, cartProductAmount + 1)}>+</h1>
+				<h1
+					onClick={() =>
+						updateCartAmount(productsData._id, cartProductAmount + 1)
+					}
+				>
+					+
+				</h1>
 				<h2>{cartProductAmount}</h2>
 				<h3
 					onClick={() => {
-						if (cartProductAmount > 0) updateCartAmount(productsData._id, cartProductAmount - 1);
+						if (cartProductAmount > 0)
+							updateCartAmount(productsData._id, cartProductAmount - 1);
 					}}
 				>
 					-
@@ -50,8 +54,12 @@ const Container = styled.div`
 	padding: 1.3rem;
 	font-size: 1.5vh;
 	img {
-		width: 40vw;
-		height: 15vh;
+		width: 120px;
+		height: auto;
+		@media (max-width: 525px) {
+			width: 40vw;
+			height: 15vh;
+		}
 	}
 	p {
 		top: 6%;
