@@ -279,7 +279,6 @@ const SuccessContainer = styled.div`
 		text-align: right;
 		margin-right: 5vw;
 		margin-top: 3vh;
-		font-weight: 700;
 		color: #273b51;
 		display: inline-block;
 		padding: 0.5em 1em;
@@ -288,6 +287,7 @@ const SuccessContainer = styled.div`
 	h3 span {
 		background-color: #f2f2f2;
 		border-bottom: 1px solid #ddd;
+        font-weight: 700;
 	}
 	h4 {
 		font-weight: 700;
