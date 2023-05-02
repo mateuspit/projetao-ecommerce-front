@@ -45,12 +45,13 @@ export default function Checkout() {
 		};
 
 		axios
-			.post(`${REACT_APP_API_URL}/checkout`, body, config)
+			.post(`${REACT_APP_API_URL}checkout`, body, config)
 			.then((res) => {
 				console.log(res.data);
 				navigate("/success", { state: { purchaseData: body } });
 			})
 			.catch((err) => {
+				alert(err.response.data);
 				console.log(err.response.data);
 				navigate("/");
 			});
