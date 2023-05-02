@@ -109,7 +109,7 @@ export default function Home() {
 						Total: R${(calculateTotal() * 0.9).toFixed(2)}
 					</p>
 					<div className="buttons">
-						<button>Cancelar</button>
+						<button onClick={() => setDisplay("none")}>Cancelar</button>
 						<button onClick={handleCheckout}>Comprar</button>
 					</div>
 				</SideMenu>
