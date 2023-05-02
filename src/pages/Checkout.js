@@ -22,7 +22,6 @@ export default function Checkout() {
 	const location = useLocation();
 
 	const products = location.state?.products || [];
-	//console.log(products);
 
 	const [cardName, setCardName] = useState("");
 	const [cardNumber, setCardNumber] = useState("");
@@ -31,11 +30,6 @@ export default function Checkout() {
 	const [checkoutPageDisable, setCheckoutPageDisable] = useState(true);
 
 	const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
-
-	//const productsObject = products.reduce((obj, product) => {
-	//	obj[product._id] = product.qntd;
-	//	return obj;
-	//}, {});
 
 	function handleSubmit() {
 		setCheckoutPageDisable(false);
@@ -46,7 +40,6 @@ export default function Checkout() {
 			expirationDate,
 			cardCVC,
 		};
-		console.log(body);
 
 		const config = {
 			headers: {
@@ -56,15 +49,13 @@ export default function Checkout() {
 
 		axios
 			.post(`${REACT_APP_API_URL}checkout`, body, config)
-			.then((res) => {
-				console.log(res.data);
+			.then(() => {
 				setCheckoutPageDisable(true);
 				navigate("/success", { state: { purchaseData: body } });
 			})
 			.catch((err) => {
 				alert(err.response.data);
 				setCheckoutPageDisable(true);
-				console.log(err.response.data);
 				navigate("/");
 			});
 	}

@@ -27,7 +27,7 @@ export default function Success() {
 	//limpar carinho
 
 	let total = 0;
-	console.log(products);
+	
 	if (products.lenght !== 0) {
 		return (
 			<SuccessContainer>

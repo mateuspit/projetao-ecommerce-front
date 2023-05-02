@@ -40,10 +40,6 @@ export default function Login() {
 		});
 
 		promise.catch((res) => {
-			console.log("catch");
-			//console.log(res);
-			//console.log(res.response.data);
-			//console.log(res.response.data.errors);
 			alert(res.response.data);
 			setLoginPageDisable(false);
 			setIsLinkDisabled(false);
