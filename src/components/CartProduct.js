@@ -66,4 +66,10 @@ const Container = styled.div`
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
+	.quantity {
+		display: flex;
+		width: 10vw;
+		justify-content: space-between;
+		margin-top: 1vh;
+	}
 `;

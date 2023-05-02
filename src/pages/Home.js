@@ -108,7 +108,6 @@ export default function Home() {
 								/>
 							);
 						})}
-						;
 					</div>
 					<p className="price">
 						Total: R${(calculateTotal() * 0.9).toFixed(2)}
