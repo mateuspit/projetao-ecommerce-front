@@ -21,7 +21,7 @@ import {
 } from "../style/styles.js";
 
 export default function Home() {
-	const { setCardData, cartData, cartImage, token } = useContext(UserContext);
+	const { setCardData, cartData, cartImage, token, name } = useContext(UserContext);
 
 	const navigate = useNavigate();
 
@@ -105,7 +105,7 @@ export default function Home() {
 						</Link>
 					) : (
 						<div className="login">
-							<IoPersonCircle style={{cursor:"pointer"}} color="black" onClick={sideMenu} />
+							<h1>{`Olá ${name}`}</h1>
 						</div>
 					)}
 					<IconHome>

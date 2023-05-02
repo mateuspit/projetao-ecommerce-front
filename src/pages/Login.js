@@ -18,7 +18,7 @@ export default function Login() {
 	const [loginPageDisable, setLoginPageDisable] = useState(false);
 	const [isLinkDisabled, setIsLinkDisabled] = useState(false);
 	const navigate = useNavigate();
-	const { setToken } = useContext(UserContext);
+	const { setToken, setName } = useContext(UserContext);
 
 	function getLoginData(event) {
 		event.preventDefault();
@@ -31,9 +31,10 @@ export default function Login() {
 		});
 
 		promise.then((res) => {
-			const { token } = res.data;
+			const { token, name } = res.data;
 			const authorization = `Bearer ${token}`;
 			setToken(authorization);
+			setName(name);
 			setLoginPageDisable(false);
 			setIsLinkDisabled(false);
 			navigate("/");
