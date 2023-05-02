@@ -14,60 +14,72 @@ export default function Success() {
 	//limpar carinho
 
 	let total = 0;
+    console.log(products);
+	if (products.lenght !== 0) {
+		return (
+			<SuccessContainer>
+				<Header>
+					<SuccessTitle>
+						Compra concluída
+						<p>com sucesso!</p>
+					</SuccessTitle>
+				</Header>
+				<ClienteName>
+					<h4>Nome do cliente:</h4>
+					<p>{products.cardName}</p>
+				</ClienteName>
+				<Table>
+					<thead>
+						<TableTitles>
+							<ProductHeader>Produto</ProductHeader>
+							<QuantityHeader>Quant.</QuantityHeader>
+							<PriceHeader>Preço</PriceHeader>
+						</TableTitles>
+					</thead>
+					<tbody>
+						{products.products.map((p) => {
+							total += p.amount * p.price;
+							return (
+								<tr key={p._id}>
+									<ProductColumn>{p.name}</ProductColumn>
+									<QuantityColumn>{p.amount}</QuantityColumn>
+									<PriceColumn>{p.price}</PriceColumn>
+								</tr>
+							);
+						})}
+					</tbody>
+				</Table>
 
-	return (
-		<SuccessContainer>
-			<Header>
-				<Link to="/checkout">
-					<Icon>
-						<IoChevronBack color="WHITE" />
-					</Icon>
-				</Link>
-				<SuccessTitle>
-					Compra concluída
-					<p>com sucesso!</p>
-				</SuccessTitle>
-			</Header>
-			<ClienteName>
-				<h4>Nome do cliente:</h4>
-				<p>{products.paymentInfo.cardName}</p>
-			</ClienteName>
-			<Table>
-				<thead>
-					<TableTitles>
-						<ProductHeader>Produto</ProductHeader>
-						<QuantityHeader>Quant.</QuantityHeader>
-						<PriceHeader>Preço</PriceHeader>
-					</TableTitles>
-				</thead>
-				<tbody>
-					{products.products.map((p) => {
-						total += p.amount * p.price;
-						return (
-							<tr key={p._id}>
-								<ProductColumn>{p.name}</ProductColumn>
-								<QuantityColumn>{p.amount}</QuantityColumn>
-								<PriceColumn>{p.price}</PriceColumn>
-							</tr>
-						);
-					})}
-				</tbody>
-			</Table>
+				<h3>
+					<span>TOTAL A PAGAR: {total.toFixed(2)}</span>
+				</h3>
 
-			<h3>
-				<span>TOTAL A PAGAR: {total.toFixed(2)}</span>
-			</h3>
-
-			<ButtonDiv>
-				<Link to="/">
-					<StandardButton onClick={() => setCardData([])}>
-						Voltar para a Home
-					</StandardButton>
-				</Link>
-			</ButtonDiv>
-			<h2>Compra realizada em {new Date().toLocaleDateString("pt-BR")}</h2>
-		</SuccessContainer>
-	);
+				<ButtonDiv>
+					<Link to="/">
+						<StandardButton onClick={() => setCardData([])}>
+							Voltar para a Home
+						</StandardButton>
+					</Link>
+				</ButtonDiv>
+				<h2>Compra realizada em {new Date().toLocaleDateString("pt-BR")}</h2>
+			</SuccessContainer>
+		);
+	} else {
+		return (
+			<>
+				<Header>
+					<p>ERROR 404</p>
+				</Header>
+				<ButtonDiv>
+					<Link to="/">
+						<StandardButton onClick={() => setCardData([])}>
+							Voltar para a Home
+						</StandardButton>
+					</Link>
+				</ButtonDiv>
+			</>
+		);
+	}
 }
 
 const Table = styled.table`
@@ -155,6 +167,13 @@ const PriceHeader = styled.th`
 
 const Header = styled.header`
 	background-color: #273b51;
+    p{
+        font-size: 50px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 `;
 
 const Icon = styled.div`
