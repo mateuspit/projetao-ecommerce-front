@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { IoCart } from "react-icons/io5";
+import { UserContext } from "../contexts/UserContext.js";
 
 export default function ProductDetail({
 	setDisplayProduct,
@@ -8,8 +9,9 @@ export default function ProductDetail({
 	setCartData,
 	cartData,
 }) {
+	const { cartImage, setCartImage } = useContext(UserContext);
 	const [amount, setAmount] = useState(0);
-
+	console.log();
 	function handleAddCart() {
 		if (amount > 0) {
 			const existingProductIndex = cartData.findIndex(
@@ -32,6 +34,14 @@ export default function ProductDetail({
 						amount,
 					},
 				]);
+				setCartImage([
+					...cartImage,
+					{
+						_id: productsData._id,
+						image: productsData.image,
+					},
+				]);
+				console.log(cartImage);
 			}
 
 			setDisplayProduct("none");

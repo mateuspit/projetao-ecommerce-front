@@ -45,9 +45,6 @@ export default function Checkout() {
 			},
 		};
 
-		//console.log(config);
-		//console.log(body);
-
 		axios
 			.post(`${REACT_APP_API_URL}checkout`, body, config)
 			.then((res) => {

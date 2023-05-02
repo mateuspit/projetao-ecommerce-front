@@ -1,26 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
-// import { UserContext } from "../contexts/UserContext.js";
+import { UserContext } from "../contexts/UserContext.js";
 
 export default function CartProduct({
 	productsData,
 	updateCartAmount,
-	findProductImage,
 }) {
-	// const { cartData, setCardData } = useContext(UserContext);
+	const { cartImage } = useContext(UserContext);
 	const [cartAmount, setCartAmount] = useState(productsData.amount);
 
-	// const productData = cartData.find((prod) => prod._id === _id);
 
 	useEffect(() => {
 		updateCartAmount(productsData._id, cartAmount);
 	}, [cartAmount]);
 
-	const productImage = findProductImage(productsData._id);
-
 	return (
 		<Container>
-			<img src={productImage} />
+			<img src={cartImage} />
 			<p>X</p>
 			<h1>{productsData?.name}</h1>
 			<h3>R$ {(productsData?.price * 0.9).toFixed(2)}</h3>

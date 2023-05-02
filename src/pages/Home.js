@@ -12,7 +12,7 @@ import ProductContainer from "../components/ProductContainer.js";
 import CartProduct from "../components/CartProduct.js";
 
 export default function Home() {
-	const { setCardData, cartData } = useContext(UserContext);
+	const { setCardData, cartData, cartImage } = useContext(UserContext);
 
 	const navigate = useNavigate();
 
@@ -43,7 +43,7 @@ export default function Home() {
 	function showProduct(data) {
 		setDisplayProduct("flex");
 		setDataProduct(data);
-		// console.log(dataProduct);
+		console.log(dataProduct);
 	}
 
 	function updateCartAmount(productId, amount) {
@@ -54,10 +54,10 @@ export default function Home() {
 		);
 	}
 
-	function findProductImage(productId) {
-		const product = randomProducts.find((product) => product._id === productId);
-		return product?.image;
-	}
+	// function findProductImage(productId) {
+	// 	const product = randomProducts.find((product) => product._id === productId);
+	// 	return product?.image;
+	// }
 
 	function calculateTotal() {
 		return cartData.reduce((total, product) => {
@@ -94,15 +94,20 @@ export default function Home() {
 						<IoCart color="black" />
 					</Icon>
 					<div className="cart">
-						{cartData.map((prod) => (
-							<CartProduct
-								key={prod._id}
-								productsData={prod}
-								updateCartAmount={updateCartAmount}
-								findProductImage={findProductImage}
-								cartData={cartData}
-							/>
-						))}
+						{cartData.map((productData, index) => {
+							const productImage = cartImage.find(
+								(product) => product._id === productData._id
+							).image;
+							return (
+								<CartProduct
+									key={index}
+									productsData={productData}
+									updateCartAmount={updateCartAmount}
+									productImage={productImage}
+								/>
+							);
+						})}
+						;
 					</div>
 					<div></div>
 					<p className="price">
