@@ -10,6 +10,15 @@ import Header from "../components/Header";
 import ProductDetail from "../components/ProductDetail.js";
 import ProductContainer from "../components/ProductContainer.js";
 import CartProduct from "../components/CartProduct.js";
+import {
+	Page,
+	SideMenu,
+	OpacityDiv,
+	Backdiv,
+	IconHome,
+	LoadingText,
+	LoadingGif,
+} from "../style/styles.js";
 
 export default function Home() {
 	const { setCardData, cartData, cartImage, token } = useContext(UserContext);
@@ -93,10 +102,10 @@ export default function Home() {
 							<h1>Faça Login!</h1>
 						</div>
 					</Link>
-					<Icon>
+					<IconHome>
 						<p>Carrinho</p>
 						<IoCart color="black" />
-					</Icon>
+					</IconHome>
 					<div className="cart">
 						{cartData.map((productData, index) => {
 							const productImage = cartImage.find(
@@ -152,45 +161,6 @@ export default function Home() {
 		);
 	}
 }
-
-const LoadingText = styled.p`
-	color: #af7014;
-	font-size: 30px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 50px;
-`;
-
-const LoadingGif = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 150px;
-`;
-const Page = styled.div`
-	background-color: rgb(240, 240, 240);
-	display: flex;
-	flex-direction: column;
-	height: 100vh;
-	overflow-y: hidden;
-	align-items: center;
-	.title {
-		margin-top: 3vh;
-		font-size: 4.5vh;
-		text-align: center;
-	}
-	.container {
-		margin-top: 3.4vh;
-		display: flex;
-		flex-wrap: wrap;
-		overflow-y: scroll;
-		justify-content: space-between;
-		height: 67vh;
-		width: 87vw;
-	}
-`;
-
 const BigContainer = styled.div`
 	height: 100vh;
 	width: 100vw;
@@ -225,91 +195,4 @@ const BigContainer = styled.div`
 	.product {
 		display: ${(props) => props.displayProduct};
 	}
-`;
-
-const SideMenu = styled.div`
-	width: 70vw;
-	height: 100vh;
-	background-color: #fafafa;
-	z-index: 2;
-	position: absolute;
-	padding: 2rem;
-	align-items: center;
-	justify-content: space-between;
-	flex-direction: column;
-	p {
-		font-size: 1.7vh;
-	}
-	.price {
-		margin-bottom: 2vh;
-	}
-	.login {
-		font-size: 10vw;
-		display: flex;
-		align-items: center;
-		h1 {
-			margin-left: 4vw;
-		}
-	}
-	h1 {
-		font-size: 1.7vh;
-		margin-bottom: 1vh;
-	}
-	.cart {
-		max-height: 67vh;
-		overflow-y: scroll;
-	}
-	button {
-		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-		border-radius: 10px;
-		width: 20vw;
-		height: 6vh;
-		color: white;
-		font-size: 1.2vh;
-		border: 0;
-	}
-	.buttons {
-		width: 45vw;
-		display: flex;
-		justify-content: space-between;
-		button:nth-child(1) {
-			color: black;
-			background-color: #d9d9d9;
-		}
-		button:nth-child(2) {
-			background-color: #af7014;
-		}
-	}
-	a {
-		display: flex;
-		flex-direction: column;
-	}
-`;
-
-const OpacityDiv = styled.div`
-	right: 0;
-	top: 0;
-	z-index: 1;
-	width: 100vw;
-	height: 100vh;
-	background-color: rgb(210, 210, 210);
-	opacity: 0.8;
-	position: absolute;
-`;
-
-const Backdiv = styled.div`
-	right: 0;
-	top: 0;
-	z-index: 1;
-	width: 100vw;
-	height: 100vh;
-	background-color: rgb(210, 210, 210);
-	opacity: 0.8;
-	position: absolute;
-`;
-
-const Icon = styled.div`
-	font-size: 5vh;
-	display: flex;
-	align-items: center;
 `;
