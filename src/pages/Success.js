@@ -1,4 +1,3 @@
-/*eslint-disable */
 import React from "react";
 import styled from "styled-components";
 import { IoChevronBack } from "react-icons/io5";
@@ -82,7 +81,7 @@ export default function Success() {
 					{purchaseData.products.map((p) => {
 						total += p.amount * p.price;
 						return (
-							<tr>
+							<tr key={p._id}>
 								<ProductColumn>{p.name}</ProductColumn>
 								<QuantityColumn>{p.amount}</QuantityColumn>
 								<PriceColumn>{p.price}</PriceColumn>
@@ -92,7 +91,9 @@ export default function Success() {
 				</tbody>
 			</Table>
 
-			<h3><span>TOTAL A PAGAR: {total.toFixed(2)}</span></h3>
+			<h3>
+				<span>TOTAL A PAGAR: {total.toFixed(2)}</span>
+			</h3>
 
 			<ButtonDiv>
 				<Link to="/">
@@ -167,7 +168,7 @@ const ProductHeader = styled.th`
 
 const QuantityHeader = styled.th`
 	margin-bottom: 2vh;
-    display: flex;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 17vw;
@@ -194,8 +195,14 @@ const Header = styled.header`
 const Icon = styled.div`
 	font-size: 40px;
 	position: absolute;
-	margin-top: 5vh;
-	margin-left: 5vw;
+	margin-top: 60px;
+	margin-left: 60px;
+	@media (max-width: 625px) {
+		font-size: 40px;
+		position: absolute;
+		margin-top: 5vh;
+		margin-left: 5vw;
+	}
 `;
 
 const ClienteName = styled.div`
@@ -260,9 +267,19 @@ const SuccessTitle = styled.h1`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin-top: 4vh;
-	font-size: 7vw;
-	margin-bottom: 4vh;
+	margin-top: 30px;
+	font-size: 50px;
+	margin-bottom: 30px;
+	@media (max-width: 625px) {
+		color: white;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-top: 4vh;
+		font-size: 7vw;
+		margin-bottom: 4vh;
+	}
 `;
 
 const SuccessContainer = styled.div`
@@ -270,10 +287,19 @@ const SuccessContainer = styled.div`
 	flex-direction: column;
 	h2 {
 		color: red;
-		font-size: 3vw;
+		font-size: 20px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+        font-weight: 700;
+		@media (max-width: 625px) {
+			color: red;
+			font-size: 3vw;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+            font-weight: 700;
+		}
 	}
 	h3 {
 		text-align: right;
@@ -287,7 +313,7 @@ const SuccessContainer = styled.div`
 	h3 span {
 		background-color: #f2f2f2;
 		border-bottom: 1px solid #ddd;
-        font-weight: 700;
+		font-weight: 700;
 	}
 	h4 {
 		font-weight: 700;
