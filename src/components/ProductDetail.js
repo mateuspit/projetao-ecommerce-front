@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { IoCart } from "react-icons/io5";
 
@@ -7,9 +7,9 @@ export default function ProductDetail({
 	productsData,
 	setCartData,
 	cartData,
+	amount,
+	setAmount,
 }) {
-	const [amount, setAmount] = useState(0);
-
 	function handleAddCart() {
 		if (amount > 0) {
 			const existingProductIndex = cartData.findIndex(
@@ -35,13 +35,21 @@ export default function ProductDetail({
 			}
 
 			setDisplayProduct("none");
+			setAmount(0);
 			console.log(cartData);
 		}
 	}
 
 	return (
 		<Product className="product">
-			<p onClick={() => setDisplayProduct("none")}>X</p>
+			<p
+				onClick={() => {
+					setDisplayProduct("none");
+					setAmount(0);
+				}}
+			>
+				X
+			</p>
 			<img src={productsData?.image} />
 			<h1>{productsData?.name}</h1>
 			<h2>{productsData?.description}</h2>
