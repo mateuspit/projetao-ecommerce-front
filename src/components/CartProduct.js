@@ -1,18 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { UserContext } from "../contexts/UserContext.js";
 
-export default function CartProduct({ productsData, updateCartAmount }) {
-	const { cartImage } = useContext(UserContext);
-	const [cartAmount, setCartAmount] = useState(productsData.amount);
-
-	useEffect(() => {
-		updateCartAmount(productsData._id, cartAmount);
-	}, [cartAmount]);
+export default function CartProduct({
+	productsData,
+	updateCartAmount,
+}) {
+	const { cartImage, cartData } = useContext(UserContext);
 
 	const productImage = cartImage.find(
 		(product) => product._id === productsData._id
 	).image;
+
+	const product = cartData.find((prod) => prod._id === productsData._id);
+	const cartProductAmount = product.amount;
 
 	return (
 		<Container>
@@ -21,11 +22,11 @@ export default function CartProduct({ productsData, updateCartAmount }) {
 			<h1>{productsData?.name}</h1>
 			<h3>R$ {(productsData?.price * 0.9).toFixed(2)}</h3>
 			<div className="quantity">
-				<h1 onClick={() => setCartAmount(cartAmount + 1)}>+</h1>
-				<h2>{cartAmount}</h2>
+				<h1 onClick={() => updateCartAmount(productsData._id, cartProductAmount + 1)}>+</h1>
+				<h2>{cartProductAmount}</h2>
 				<h3
 					onClick={() => {
-						if (cartAmount > 0) setCartAmount(cartAmount - 1);
+						if (cartProductAmount > 0) updateCartAmount(productsData._id, cartProductAmount - 1);
 					}}
 				>
 					-

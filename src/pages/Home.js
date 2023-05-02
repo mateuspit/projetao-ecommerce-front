@@ -44,7 +44,6 @@ export default function Home() {
 	function showProduct(data) {
 		setDisplayProduct("flex");
 		setDataProduct(data);
-		console.log(dataProduct);
 	}
 
 	function updateCartAmount(productId, amount) {
@@ -105,12 +104,12 @@ export default function Home() {
 									productsData={productData}
 									updateCartAmount={updateCartAmount}
 									productImage={productImage}
+									cartAmount={productData.amount}
 								/>
 							);
 						})}
 						;
 					</div>
-					<div></div>
 					<p className="price">
 						Total: R${(calculateTotal() * 0.9).toFixed(2)}
 					</p>
