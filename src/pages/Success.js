@@ -6,62 +6,15 @@ import { Link, useLocation } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext.js";
 
 export default function Success() {
-	const { token } = useContext(UserContext);
+	const { cartData, setCardData } = useContext(UserContext);
 	const location = useLocation();
 
 	const products = location.state?.purchaseData || [];
 
-	// const purchaseData = {
-	// 	products: [
-	// 		{
-	// 			id: "644ebe583c9f7e8599d74f51",
-	// 			name: "Seda para Tabaco Aromatizada de Morango",
-	// 			amount: 1,
-	// 			price: 2.99,
-	// 		},
-	// 		{
-	// 			id: "644ebe583c9f7e8599d74f5f",
-	// 			name: "Fumo para Narguilé de Canela",
-	// 			amount: 2,
-	// 			price: 7.99,
-	// 		},
-	// 		{
-	// 			id: "644ebe583c9f7e8599d74f48",
-	// 			name: "Narguilé Pequeno",
-	// 			amount: 3,
-	// 			price: 35.99,
-	// 		},
-	// 		{
-	// 			id: "644ebe583c9f7e8599d74f5e",
-	// 			name: "Cachimbo de Metal",
-	// 			amount: 4,
-	// 			price: 14.99,
-	// 		},
-	// 		{
-	// 			id: "644ebe583c9f7e8599d74f4f",
-	// 			name: "Incenso de Sândalo",
-	// 			amount: 5,
-	// 			price: 3.49,
-	// 		},
-	// 		{
-	// 			id: "644ebe583c9f7e8599d74f67",
-	// 			name: "Fumo para Narguilé de Pêssego",
-	// 			amount: 6,
-	// 			price: 7.99,
-	// 		},
-	// 	],
-	// 	paymentInfo: {
-	// 		cardName: "Fulano da Silva",
-	// 		cardNumber: "4111111111111111",
-	// 		expirationDate: "12/25",
-	// 		cardCVC: "123",
-	// 	},
-	// };
-
 	//limpar carinho
-	
+
 	let total = 0;
-	
+
 	return (
 		<SuccessContainer>
 			<Header>
@@ -107,7 +60,9 @@ export default function Success() {
 
 			<ButtonDiv>
 				<Link to="/">
-					<StandardButton>Voltar para a Home</StandardButton>
+					<StandardButton onClick={() => setCardData([])}>
+						Voltar para a Home
+					</StandardButton>
 				</Link>
 			</ButtonDiv>
 			<h2>Compra realizada em {new Date().toLocaleDateString("pt-BR")}</h2>
@@ -301,14 +256,14 @@ const SuccessContainer = styled.div`
 		display: flex;
 		justify-content: center;
 		align-items: center;
-        font-weight: 700;
+		font-weight: 700;
 		@media (max-width: 625px) {
 			color: red;
 			font-size: 3vw;
 			display: flex;
 			justify-content: center;
 			align-items: center;
-            font-weight: 700;
+			font-weight: 700;
 		}
 	}
 	h3 {
