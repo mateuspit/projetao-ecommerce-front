@@ -4,6 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { IoChevronBack } from "react-icons/io5";
 import { UserContext } from "../contexts/UserContext.js";
+import ReactLoading from "react-loading";
 
 export default function Checkout() {
 	const { token } = useContext(UserContext);
@@ -12,105 +13,142 @@ export default function Checkout() {
 	const location = useLocation();
 
 	const products = location.state?.products || [];
-	// console.log(products);
+	//console.log(products);
 
 	const [cardName, setCardName] = useState("");
 	const [cardNumber, setCardNumber] = useState("");
 	const [expirationDate, setExpirationDate] = useState("");
 	const [cardCVC, setCardCVC] = useState("");
+	const [checkoutPageDisable, setCheckoutPageDisable] = useState(true);
 
 	const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
-	const productsObject = products.reduce((obj, product) => {
-		obj[product._id] = product.qntd;
-		return obj;
-	}, {});
+	//const productsObject = products.reduce((obj, product) => {
+	//	obj[product._id] = product.qntd;
+	//	return obj;
+	//}, {});
 
 	function handleSubmit() {
+		setCheckoutPageDisable(false);
 		const body = {
-			products: productsObject,
-			paymentData: {
-				cardName,
-				cardNumber,
-				expirationDate,
-				cardCVC,
-			},
+			products,
+			cardName,
+			cardNumber: cardNumber.replace(/ /g, ""),
+			expirationDate,
+			cardCVC,
 		};
 		console.log(body);
 
 		const config = {
 			headers: {
-				Authorization: `Bearer ${token}`,
+				Authorization: token,
 			},
 		};
+
+		//console.log(config);
+		//console.log(body);
 
 		axios
 			.post(`${REACT_APP_API_URL}checkout`, body, config)
 			.then((res) => {
 				console.log(res.data);
+				setCheckoutPageDisable(true);
 				navigate("/success", { state: { purchaseData: body } });
 			})
 			.catch((err) => {
 				alert(err.response.data);
+				setCheckoutPageDisable(true);
 				console.log(err.response.data);
 				navigate("/");
 			});
 	}
+	if (checkoutPageDisable) {
+		return (
+			<Container>
+				<ContainerHeader>
+					<h1>Checkout</h1>
+					<Link to="/">
+						<Icon>
+							<IoChevronBack />
+						</Icon>
+					</Link>
+				</ContainerHeader>
 
-	return (
-		<Container>
-			<ContainerHeader>
-				<h1>Checkout</h1>
-				<Link to="/">
+				<p>Insira os dados do cartão de crédito</p>
+
+				<Form>
+					<Input
+						name="cardName"
+						type="text"
+						placeholder="Nome no cartão"
+						value={cardName}
+						onChange={(e) => setCardName(e.target.value)}
+						required
+					/>
+					<Input
+						name="cardNumber"
+						type="text"
+						placeholder="Número do cartão"
+						value={cardNumber}
+						onChange={(e) => setCardNumber(e.target.value)}
+						required
+					/>
+					<div>
+						<Input
+							name="expirationDate"
+							type="text"
+							placeholder="MM / AA"
+							value={expirationDate}
+							onChange={(e) => setExpirationDate(e.target.value)}
+							required
+							className="smallerInput"
+						/>
+						<Input
+							name="CVV"
+							type="text"
+							placeholder="CVC"
+							value={cardCVC}
+							onChange={(e) => setCardCVC(e.target.value)}
+							required
+						/>
+					</div>
+					<Button onClick={handleSubmit}>Finalizar compra</Button>
+				</Form>
+			</Container>
+		);
+	} else {
+		return (
+			<>
+				<ContainerHeader>
+					<h1>Checkout</h1>
 					<Icon>
 						<IoChevronBack />
 					</Icon>
-				</Link>
-			</ContainerHeader>
-
-			<p>Insira os dados do cartão de crédito</p>
-
-			<Form>
-				<Input
-					name="cardName"
-					type="text"
-					placeholder="Nome no cartão"
-					value={cardName}
-					onChange={(e) => setCardName(e.target.value)}
-					required
-				/>
-				<Input
-					name="cardNumber"
-					type="text"
-					placeholder="Número do cartão"
-					value={cardNumber}
-					onChange={(e) => setCardNumber(e.target.value)}
-					required
-				/>
-				<div>
-					<Input
-						name="expirationDate"
-						type="text"
-						placeholder="MM / AA"
-						value={expirationDate}
-						onChange={(e) => setExpirationDate(e.target.value)}
-						required
-						className="smallerInput"
-					/>
-					<Input
-						name="CVV"
-						type="text"
-						placeholder="CVC"
-						value={cardCVC}
-						onChange={(e) => setCardCVC(e.target.value)}
-						required
-					/>
-				</div>
-				<Button onClick={handleSubmit}>Finalizar compra</Button>
-			</Form>
-		</Container>
-	);
+				</ContainerHeader>
+				<LoadingText>Realizando compra!</LoadingText>
+				<LoadingGif>
+					<ReactLoading type="spin" color="#af7014" width={200} />
+				</LoadingGif>
+			</>
+		);
+	}
 }
+
+const LoadingText = styled.p`
+	color: #af7014;
+	font-size: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 100px;
+`;
+
+const LoadingGif = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 50px;
+`;
 
 const Container = styled.div`
 	display: flex;
@@ -183,6 +221,7 @@ const Button = styled.button`
 	background-color: #af7014;
 	color: #ffffff;
 	font-size: 20px;
+	cursor: pointer;
 `;
 const Icon = styled.div`
 	color: #ffffff;
