@@ -8,6 +8,8 @@ export default function ProductDetail({
 	productsData,
 	setCartData,
 	cartData,
+	amount,
+	setAmount,
 }) {
 	const { cartImage, setCartImage } = useContext(UserContext);
 	const [amount, setAmount] = useState(0);
@@ -45,13 +47,21 @@ export default function ProductDetail({
 			}
 
 			setDisplayProduct("none");
+			setAmount(0);
 			console.log(cartData);
 		}
 	}
 
 	return (
 		<Product className="product">
-			<p onClick={() => setDisplayProduct("none")}>X</p>
+			<p
+				onClick={() => {
+					setDisplayProduct("none");
+					setAmount(0);
+				}}
+			>
+				X
+			</p>
 			<img src={productsData?.image} />
 			<h1>{productsData?.name}</h1>
 			<h2>{productsData?.description}</h2>

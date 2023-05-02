@@ -21,6 +21,7 @@ export default function Home() {
 	const [randomProducts, setRandomProducts] = useState([]);
 	const [homeProductsReady, setHomeProductsReady] = useState(false);
 	const [dataProduct, setDataProduct] = useState();
+	const [amount, setAmount] = useState(0);
 
 	useEffect(() => {
 		const promise = axios.get(`${process.env.REACT_APP_API_URL}products`);
@@ -77,10 +78,15 @@ export default function Home() {
 					productsData={dataProduct}
 					setCartData={setCardData}
 					cartData={cartData}
+					amount={amount}
+					setAmount={setAmount}
 				/>
 				<Backdiv
 					className="product"
-					onClick={() => setDisplayProduct("none")}
+					onClick={() => {
+						setDisplayProduct("none");
+						setAmount(0);
+					}}
 				/>
 				<SideMenu className="slide-right">
 					<Link to={"/login"}>
