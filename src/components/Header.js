@@ -9,13 +9,13 @@ export default function Header({sideMenu}) {
 	return (
 		<HeaderStyle>
 			<MenuIcon>
-				<HiOutlineMenu color="white" onClick={sideMenu}/>
+				<HiOutlineMenu style={{cursor:"pointer"}} color="white" onClick={sideMenu}/>
 			</MenuIcon>
 			<Link to="/">
 				<LogoWhite src={logoWhite} alt="logo branca" />
 			</Link>
 			<UserIcon>
-				<IoPersonCircle color="white" onClick={sideMenu}/>
+				<IoPersonCircle style={{cursor:"pointer"}} color="white" onClick={sideMenu}/>
 			</UserIcon>
 		</HeaderStyle>
 	);

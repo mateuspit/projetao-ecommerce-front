@@ -99,13 +99,13 @@ export default function Home() {
 					{!token ? (
 						<Link to={"/login"}>
 							<div className="login">
-								<IoPersonCircle color="black" onClick={sideMenu} />
+								<IoPersonCircle style={{cursor:"pointer"}} color="black" onClick={sideMenu} />
 								<h1>Faça Login!</h1>
 							</div>
 						</Link>
 					) : (
 						<div className="login">
-							<IoPersonCircle color="black" onClick={sideMenu} />
+							<IoPersonCircle style={{cursor:"pointer"}} color="black" onClick={sideMenu} />
 						</div>
 					)}
 					<IconHome>
@@ -132,8 +132,8 @@ export default function Home() {
 						Total: R${(calculateTotal() * 0.9).toFixed(2)}
 					</p>
 					<div className="buttons">
-						<button onClick={() => setDisplay("none")}>Cancelar</button>
-						<button onClick={handleCheckout}>Comprar</button>
+						<button style={{cursor:"pointer"}} onClick={() => setDisplay("none")}>Cancelar</button>
+						<button style={{cursor:"pointer"}} onClick={handleCheckout}>Comprar</button>
 					</div>
 				</SideMenu>
 				<OpacityDiv
