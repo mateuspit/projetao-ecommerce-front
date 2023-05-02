@@ -96,12 +96,18 @@ export default function Home() {
 					}}
 				/>
 				<SideMenu className="slide-right">
-					<Link to={"/login"}>
+					{!token ? (
+						<Link to={"/login"}>
+							<div className="login">
+								<IoPersonCircle color="black" onClick={sideMenu} />
+								<h1>Faça Login!</h1>
+							</div>
+						</Link>
+					) : (
 						<div className="login">
 							<IoPersonCircle color="black" onClick={sideMenu} />
-							<h1>Faça Login!</h1>
 						</div>
-					</Link>
+					)}
 					<IconHome>
 						<p>Carrinho</p>
 						<IoCart color="black" />
