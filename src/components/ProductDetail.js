@@ -12,7 +12,7 @@ export default function ProductDetail({
 	setAmount,
 }) {
 	const { cartImage, setCartImage } = useContext(UserContext);
-	console.log();
+
 	function handleAddCart() {
 		if (amount > 0) {
 			const existingProductIndex = cartData.findIndex(
@@ -42,12 +42,12 @@ export default function ProductDetail({
 						image: productsData.image,
 					},
 				]);
-				console.log(cartImage);
+			
 			}
 
 			setDisplayProduct("none");
 			setAmount(0);
-			console.log(cartData);
+	
 		}
 	}
 
