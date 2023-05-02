@@ -1,14 +1,40 @@
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import React from "react";
+// import { UserContext } from "../contexts/UserContext.js";
 
-export default function CartProduct() {
+export default function CartProduct({
+	productsData,
+	updateCartAmount,
+	findProductImage,
+}) {
+	// const { cartData, setCardData } = useContext(UserContext);
+	const [cartAmount, setCartAmount] = useState(productsData.amount);
+
+	// const productData = cartData.find((prod) => prod._id === _id);
+
+	useEffect(() => {
+		updateCartAmount(productsData._id, cartAmount);
+	}, [cartAmount]);
+
+	const productImage = findProductImage(productsData._id);
+
 	return (
 		<Container>
-			<img src="https://photos.enjoei.com.br/nargas-mini-sultan-completo-usado-poucas-vezes-83906751/828xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy82MTQ5OTkxLzhiZTc0MDk5MTFmNGRiNTY0NzE5OTU4NmFlYTNhNWVmLmpwZw" />
+			<img src={productImage} />
 			<p>X</p>
-			<h4>nargas</h4>
-			<h2>R$10</h2>
-			<h3>+ 2 -</h3>
+			<h1>{productsData?.name}</h1>
+			<h3>R$ {(productsData?.price * 0.9).toFixed(2)}</h3>
+			<div className="quantity">
+				<h1 onClick={() => setCartAmount(cartAmount + 1)}>+</h1>
+				<h2>{cartAmount}</h2>
+				<h3
+					onClick={() => {
+						if (cartAmount > 0) setCartAmount(cartAmount - 1);
+					}}
+				>
+					-
+				</h3>
+			</div>
 		</Container>
 	);
 }

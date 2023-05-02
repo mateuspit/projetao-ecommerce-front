@@ -1,26 +1,31 @@
 import React, { useEffect, useState, useContext } from "react";
-import Header from "../components/Header";
+import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
-import ProductContainer from "../components/ProductContainer.js";
-import { IoPersonCircle, IoCart } from "react-icons/io5";
-import CartProduct from "../components/CartProduct.js";
-import ProductDetail from "../components/ProductDetail.js";
 import axios from "axios";
 import ReactLoading from "react-loading";
+import { IoPersonCircle, IoCart } from "react-icons/io5";
 import { UserContext } from "../contexts/UserContext.js";
 
+import Header from "../components/Header";
+import ProductDetail from "../components/ProductDetail.js";
+import ProductContainer from "../components/ProductContainer.js";
+import CartProduct from "../components/CartProduct.js";
+
 export default function Home() {
+	const { setCardData, cartData } = useContext(UserContext);
+
+	const navigate = useNavigate();
+
 	const [display, setDisplay] = useState("none");
 	const [displayProduct, setDisplayProduct] = useState("none");
 	const [randomProducts, setRandomProducts] = useState([]);
 	const [homeProductsReady, setHomeProductsReady] = useState(false);
 	const [dataProduct, setDataProduct] = useState();
-	const { setCardData, cartData } = useContext(UserContext);
 
 	useEffect(() => {
 		const promise = axios.get(`${process.env.REACT_APP_API_URL}products`);
-		
-		promise.then((res) => {	
+
+		promise.then((res) => {
 			setRandomProducts(res.data);
 			setHomeProductsReady(true);
 		});
@@ -38,6 +43,30 @@ export default function Home() {
 	function showProduct(data) {
 		setDisplayProduct("flex");
 		setDataProduct(data);
+		// console.log(dataProduct);
+	}
+
+	function updateCartAmount(productId, amount) {
+		setCardData(
+			cartData.map((prod) =>
+				prod._id === productId ? { ...prod, amount } : prod
+			)
+		);
+	}
+
+	function findProductImage(productId) {
+		const product = randomProducts.find((product) => product._id === productId);
+		return product?.image;
+	}
+
+	function calculateTotal() {
+		return cartData.reduce((total, product) => {
+			return total + product.price * product.amount;
+		}, 0);
+	}
+
+	function handleCheckout() {
+		navigate("/checkout", { state: { products: cartData } });
 	}
 
 	if (homeProductsReady) {
@@ -54,27 +83,34 @@ export default function Home() {
 					onClick={() => setDisplayProduct("none")}
 				/>
 				<SideMenu className="slide-right">
-					<div className="login">
-						<IoPersonCircle color="black" onClick={sideMenu} />
-						<h1>Faça Login!</h1>
-					</div>
+					<Link to={"/login"}>
+						<div className="login">
+							<IoPersonCircle color="black" onClick={sideMenu} />
+							<h1>Faça Login!</h1>
+						</div>
+					</Link>
 					<Icon>
 						<p>Carrinho</p>
 						<IoCart color="black" />
 					</Icon>
 					<div className="cart">
-						<CartProduct />
-						<CartProduct />
-						<CartProduct />
-						<CartProduct />
-						<CartProduct />
-						<CartProduct />
+						{cartData.map((prod) => (
+							<CartProduct
+								key={prod._id}
+								productsData={prod}
+								updateCartAmount={updateCartAmount}
+								findProductImage={findProductImage}
+								cartData={cartData}
+							/>
+						))}
 					</div>
 					<div></div>
-					<p className="price">Total: R$100</p>
+					<p className="price">
+						Total: R${(calculateTotal() * 0.9).toFixed(2)}
+					</p>
 					<div className="buttons">
 						<button>Cancelar</button>
-						<button>Comprar</button>
+						<button onClick={handleCheckout}>Comprar</button>
 					</div>
 				</SideMenu>
 				<OpacityDiv
@@ -235,6 +271,10 @@ const SideMenu = styled.div`
 		button:nth-child(2) {
 			background-color: #af7014;
 		}
+	}
+	a {
+		display: flex;
+		flex-direction: column;
 	}
 `;
 

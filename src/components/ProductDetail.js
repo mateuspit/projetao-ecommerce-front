@@ -10,6 +10,35 @@ export default function ProductDetail({
 }) {
 	const [amount, setAmount] = useState(0);
 
+	function handleAddCart() {
+		if (amount > 0) {
+			const existingProductIndex = cartData.findIndex(
+				(prod) => prod._id === productsData._id
+			);
+
+			if (existingProductIndex !== -1) {
+				// Produto já está no carrinho, atualize a quantidade
+				const updatedCartData = [...cartData];
+				updatedCartData[existingProductIndex].amount += amount;
+				setCartData(updatedCartData);
+			} else {
+				// Produto não está no carrinho, adicione-o
+				setCartData([
+					...cartData,
+					{
+						name: productsData.name,
+						price: productsData.price,
+						_id: productsData._id,
+						amount,
+					},
+				]);
+			}
+
+			setDisplayProduct("none");
+			console.log(cartData);
+		}
+	}
+
 	return (
 		<Product className="product">
 			<p onClick={() => setDisplayProduct("none")}>X</p>
@@ -29,28 +58,7 @@ export default function ProductDetail({
 				</h3>
 			</div>
 
-			<StandardButton
-				onClick={() => {
-					setCartData([
-						...cartData,
-						{
-							name: productsData.name,
-							price: productsData.price,
-							_id: productsData._id,
-							amount,
-						},
-					]);
-					console.log([
-						...cartData,
-						{
-							name: productsData.name,
-							price: productsData.price,
-							_id: productsData._id,
-							amount,
-						},
-					]);
-				}}
-			>
+			<StandardButton onClick={() => handleAddCart()}>
 				<h5>Adicionar ao carrinho</h5>
 				<IoCart color="white" />
 			</StandardButton>
