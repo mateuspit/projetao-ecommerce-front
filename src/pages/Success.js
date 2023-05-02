@@ -1,58 +1,67 @@
 /*eslint-disable */
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { IoChevronBack } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext.js";
 
 export default function Success() {
-	const purchaseData = {
-		products: [
-			{
-				id: "644ebe583c9f7e8599d74f51",
-				name: "Seda para Tabaco Aromatizada de Morango",
-				amount: 1,
-				price: 2.99,
-			},
-			{
-				id: "644ebe583c9f7e8599d74f5f",
-				name: "Fumo para Narguilé de Canela",
-				amount: 2,
-				price: 7.99,
-			},
-			{
-				id: "644ebe583c9f7e8599d74f48",
-				name: "Narguilé Pequeno",
-				amount: 3,
-				price: 35.99,
-			},
-			{
-				id: "644ebe583c9f7e8599d74f5e",
-				name: "Cachimbo de Metal",
-				amount: 4,
-				price: 14.99,
-			},
-			{
-				id: "644ebe583c9f7e8599d74f4f",
-				name: "Incenso de Sândalo",
-				amount: 5,
-				price: 3.49,
-			},
-			{
-				id: "644ebe583c9f7e8599d74f67",
-				name: "Fumo para Narguilé de Pêssego",
-				amount: 6,
-				price: 7.99,
-			},
-		],
-		paymentInfo: {
-			cardName: "Fulano da Silva",
-			cardNumber: "4111111111111111",
-			expirationDate: "12/25",
-			cardCVC: "123",
-		},
-	};
+	const { token } = useContext(UserContext);
+	const location = useLocation();
+
+	const products = location.state?.purchaseData || [];
+
+	// const purchaseData = {
+	// 	products: [
+	// 		{
+	// 			id: "644ebe583c9f7e8599d74f51",
+	// 			name: "Seda para Tabaco Aromatizada de Morango",
+	// 			amount: 1,
+	// 			price: 2.99,
+	// 		},
+	// 		{
+	// 			id: "644ebe583c9f7e8599d74f5f",
+	// 			name: "Fumo para Narguilé de Canela",
+	// 			amount: 2,
+	// 			price: 7.99,
+	// 		},
+	// 		{
+	// 			id: "644ebe583c9f7e8599d74f48",
+	// 			name: "Narguilé Pequeno",
+	// 			amount: 3,
+	// 			price: 35.99,
+	// 		},
+	// 		{
+	// 			id: "644ebe583c9f7e8599d74f5e",
+	// 			name: "Cachimbo de Metal",
+	// 			amount: 4,
+	// 			price: 14.99,
+	// 		},
+	// 		{
+	// 			id: "644ebe583c9f7e8599d74f4f",
+	// 			name: "Incenso de Sândalo",
+	// 			amount: 5,
+	// 			price: 3.49,
+	// 		},
+	// 		{
+	// 			id: "644ebe583c9f7e8599d74f67",
+	// 			name: "Fumo para Narguilé de Pêssego",
+	// 			amount: 6,
+	// 			price: 7.99,
+	// 		},
+	// 	],
+	// 	paymentInfo: {
+	// 		cardName: "Fulano da Silva",
+	// 		cardNumber: "4111111111111111",
+	// 		expirationDate: "12/25",
+	// 		cardCVC: "123",
+	// 	},
+	// };
+
 	//limpar carinho
+	
 	let total = 0;
+	
 	return (
 		<SuccessContainer>
 			<Header>
@@ -68,7 +77,7 @@ export default function Success() {
 			</Header>
 			<ClienteName>
 				<h4>Nome do cliente:</h4>
-				<p>{purchaseData.paymentInfo.cardName}</p>
+				<p>{products.paymentInfo.cardName}</p>
 			</ClienteName>
 			<Table>
 				<thead>
@@ -79,7 +88,7 @@ export default function Success() {
 					</TableTitles>
 				</thead>
 				<tbody>
-					{purchaseData.products.map((p) => {
+					{products.products.map((p) => {
 						total += p.amount * p.price;
 						return (
 							<tr>
@@ -92,7 +101,9 @@ export default function Success() {
 				</tbody>
 			</Table>
 
-			<h3><span>TOTAL A PAGAR: {total.toFixed(2)}</span></h3>
+			<h3>
+				<span>TOTAL A PAGAR: {total.toFixed(2)}</span>
+			</h3>
 
 			<ButtonDiv>
 				<Link to="/">
@@ -167,7 +178,7 @@ const ProductHeader = styled.th`
 
 const QuantityHeader = styled.th`
 	margin-bottom: 2vh;
-    display: flex;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 17vw;
@@ -287,7 +298,7 @@ const SuccessContainer = styled.div`
 	h3 span {
 		background-color: #f2f2f2;
 		border-bottom: 1px solid #ddd;
-        font-weight: 700;
+		font-weight: 700;
 	}
 	h4 {
 		font-weight: 700;

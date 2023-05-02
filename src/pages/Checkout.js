@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import { IoChevronBack } from "react-icons/io5";
+import { UserContext } from "../contexts/UserContext.js";
 
 export default function Checkout() {
-	const token = "user";
+	const { token } = useContext(UserContext);
 
 	const navigate = useNavigate();
 	const location = useLocation();
 
 	const products = location.state?.products || [];
+	// console.log(products);
 
 	const [cardName, setCardName] = useState("");
 	const [cardNumber, setCardNumber] = useState("");
@@ -46,11 +48,11 @@ export default function Checkout() {
 			.post(`${REACT_APP_API_URL}/checkout`, body, config)
 			.then((res) => {
 				console.log(res.data);
-				navigate("/success");
+				navigate("/success", { state: { purchaseData: body } });
 			})
 			.catch((err) => {
 				console.log(err.response.data);
-				navigate("/cart");
+				navigate("/");
 			});
 	}
 
@@ -58,14 +60,16 @@ export default function Checkout() {
 		<Container>
 			<ContainerHeader>
 				<h1>Checkout</h1>
-				<Link to="/cart">
+				<Link to="/">
 					<Icon>
 						<IoChevronBack />
 					</Icon>
 				</Link>
 			</ContainerHeader>
+
 			<p>Insira os dados do cartão de crédito</p>
-			<Form onSubmit={handleSubmit}>
+
+			<Form>
 				<Input
 					name="cardName"
 					type="text"
@@ -101,7 +105,7 @@ export default function Checkout() {
 						required
 					/>
 				</div>
-				<Button type="submit">Finalizar compra</Button>
+				<Button onClick={handleSubmit}>Finalizar compra</Button>
 			</Form>
 		</Container>
 	);
