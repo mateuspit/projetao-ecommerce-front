@@ -91,7 +91,7 @@ export default function Success() {
 					{products.products.map((p) => {
 						total += p.amount * p.price;
 						return (
-							<tr>
+							<tr key={p._id}>
 								<ProductColumn>{p.name}</ProductColumn>
 								<QuantityColumn>{p.amount}</QuantityColumn>
 								<PriceColumn>{p.price}</PriceColumn>
@@ -205,8 +205,14 @@ const Header = styled.header`
 const Icon = styled.div`
 	font-size: 40px;
 	position: absolute;
-	margin-top: 5vh;
-	margin-left: 5vw;
+	margin-top: 60px;
+	margin-left: 60px;
+	@media (max-width: 625px) {
+		font-size: 40px;
+		position: absolute;
+		margin-top: 5vh;
+		margin-left: 5vw;
+	}
 `;
 
 const ClienteName = styled.div`
@@ -271,9 +277,19 @@ const SuccessTitle = styled.h1`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin-top: 4vh;
-	font-size: 7vw;
-	margin-bottom: 4vh;
+	margin-top: 30px;
+	font-size: 50px;
+	margin-bottom: 30px;
+	@media (max-width: 625px) {
+		color: white;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-top: 4vh;
+		font-size: 7vw;
+		margin-bottom: 4vh;
+	}
 `;
 
 const SuccessContainer = styled.div`
@@ -281,10 +297,19 @@ const SuccessContainer = styled.div`
 	flex-direction: column;
 	h2 {
 		color: red;
-		font-size: 3vw;
+		font-size: 20px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+        font-weight: 700;
+		@media (max-width: 625px) {
+			color: red;
+			font-size: 3vw;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+            font-weight: 700;
+		}
 	}
 	h3 {
 		text-align: right;
