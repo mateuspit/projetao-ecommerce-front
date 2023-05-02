@@ -96,21 +96,52 @@ export const Product = styled.div`
 	width: 85vw;
 	height: 85vh;
 	z-index: 3;
-	padding: 2rem;
+	padding-top: 2rem;
+	padding-right: 2rem;
+	padding-left: 2rem;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+	@media (max-width: 525px) {
+		position: absolute;
+		top: 7%;
+		left: 7%;
+		right: 7%;
+		border: 7%;
+		background-color: #fafafa;
+		width: 85vw;
+		height: 85vh;
+		z-index: 3;
+		padding: 2rem;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+	}
 	.quantity {
 		display: flex;
 		width: 15vw;
-		max-height: 2vh;
 		justify-content: space-between;
 		h1,
 		h2,
 		h3 {
-			font-size: 2vh;
+			font-size: 20px;
 			color: black;
 			cursor: pointer;
+            font-weight: 700;
+		}
+		@media (max-width: 525px) {
+			display: flex;
+			width: 15vw;
+			max-height: 2vh;
+			justify-content: space-between;
+			h1,
+			h2,
+			h3 {
+				font-size: 2vh;
+				color: black;
+				cursor: pointer;
+                font-weight: 700;
+			}
 		}
 	}
 	p {
@@ -120,24 +151,44 @@ export const Product = styled.div`
 		cursor: pointer;
 	}
 	img {
-		width: 60vw;
-		height: 23vh;
+		width: 300px;
+		height: auto;
+		@media (max-width: 525px) {
+			width: 60vw;
+			height: 23vh;
+		}
 	}
 	h1 {
 		font-size: 3vh;
-		min-height: 12vh;
 		overflow-x: scroll;
+		font-weight: 700;
+		@media (max-width: 525px) {
+			font-size: 3vh;
+			min-height: 12vh;
+			overflow-x: scroll;
+		}
 	}
 	h2 {
-		font-size: 1.7vh;
-		max-height: 19vh;
+		font-size: 20px;
+        padding-bottom: 15px;
 		overflow-y: scroll;
-		line-height: 2.1vh;
 		text-align: justify;
+		@media (max-width: 525px) {
+			font-size: 1.7vh;
+			max-height: 19vh;
+			overflow-y: scroll;
+			line-height: 2.1vh;
+			text-align: justify;
+		}
 	}
 	h3 {
 		color: green;
-		font-size: 2vh;
+		font-size: 30px;
+        padding-bottom: 10px;
+		@media (max-width: 525px) {
+			color: green;
+			font-size: 2vh;
+		}
 	}
 `;
 
