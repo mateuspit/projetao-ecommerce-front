@@ -99,7 +99,7 @@ export default function Home() {
 					{!token ? (
 						<Link to={"/login"}>
 							<div className="login">
-								<IoPersonCircle style={{cursor:"pointer"}} color="black" onClick={sideMenu} />
+								<IoPersonCircle style={{cursor:"pointer"}} color="#273b51" onClick={sideMenu} />
 								<h1>Faça Login!</h1>
 							</div>
 						</Link>
@@ -110,7 +110,7 @@ export default function Home() {
 					)}
 					<IconHome>
 						<p>Carrinho</p>
-						<IoCart color="black" />
+						<IoCart color="#273b51" />
 					</IconHome>
 					<div className="cart">
 						{cartData.map((productData, index) => {

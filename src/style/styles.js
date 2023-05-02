@@ -332,6 +332,7 @@ export const SideMenu = styled.div`
 	}
 	.price {
 		margin-bottom: 2vh;
+        color: "#273b51"
 	}
 	.login {
 		font-size: 10vw;
@@ -402,6 +403,7 @@ export const IconHome = styled.div`
 	font-size: 5vh;
 	display: flex;
 	align-items: center;
+    color: #273b51;
 `;
 
 export const StandardButtonLogin = styled.button`
