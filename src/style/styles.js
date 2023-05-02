@@ -127,7 +127,7 @@ export const Product = styled.div`
 			font-size: 20px;
 			color: black;
 			cursor: pointer;
-            font-weight: 700;
+			font-weight: 700;
 		}
 		@media (max-width: 525px) {
 			display: flex;
@@ -140,7 +140,7 @@ export const Product = styled.div`
 				font-size: 2vh;
 				color: black;
 				cursor: pointer;
-                font-weight: 700;
+				font-weight: 700;
 			}
 		}
 	}
@@ -170,7 +170,7 @@ export const Product = styled.div`
 	}
 	h2 {
 		font-size: 20px;
-        padding-bottom: 15px;
+		padding-bottom: 15px;
 		overflow-y: scroll;
 		text-align: justify;
 		@media (max-width: 525px) {
@@ -184,7 +184,7 @@ export const Product = styled.div`
 	h3 {
 		color: green;
 		font-size: 30px;
-        padding-bottom: 10px;
+		padding-bottom: 10px;
 		@media (max-width: 525px) {
 			color: green;
 			font-size: 2vh;
@@ -318,7 +318,6 @@ export const Page = styled.div`
 `;
 
 export const SideMenu = styled.div`
-	width: 70vw;
 	height: 100vh;
 	background-color: #fafafa;
 	z-index: 2;
@@ -327,12 +326,23 @@ export const SideMenu = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	flex-direction: column;
+	@media (max-width: 525px) {
+		width: 70vw;
+		height: 100vh;
+		background-color: #fafafa;
+		z-index: 2;
+		position: absolute;
+		padding: 2rem;
+		align-items: center;
+		justify-content: space-between;
+		flex-direction: column;
+	}
 	p {
 		font-size: 1.7vh;
 	}
 	.price {
 		margin-bottom: 2vh;
-        color: "#273b51"
+		color: "#273b51";
 	}
 	.login {
 		font-size: 10vw;
@@ -403,7 +413,7 @@ export const IconHome = styled.div`
 	font-size: 5vh;
 	display: flex;
 	align-items: center;
-    color: #273b51;
+	color: #273b51;
 `;
 
 export const StandardButtonLogin = styled.button`
