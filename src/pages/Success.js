@@ -1,12 +1,11 @@
 /*eslint-disable */
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { IoChevronBack } from "react-icons/io5";
 import { Link, useLocation } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext.js";
 
 export default function Success() {
-	const { cartData, setCardData } = useContext(UserContext);
+	const { setCardData } = useContext(UserContext);
 	const location = useLocation();
 
 	const products = location.state?.purchaseData || [];
@@ -14,7 +13,7 @@ export default function Success() {
 	//limpar carinho
 
 	let total = 0;
-    console.log(products);
+	console.log(products);
 	if (products.lenght !== 0) {
 		return (
 			<SuccessContainer>
@@ -167,13 +166,14 @@ const PriceHeader = styled.th`
 
 const Header = styled.header`
 	background-color: #273b51;
-    p{
-        font-size: 50px;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+	font-size: 36px;
+	p {
+		font-size: 36px;
+		color: white;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 `;
 
 const Icon = styled.div`

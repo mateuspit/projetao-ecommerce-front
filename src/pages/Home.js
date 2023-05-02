@@ -12,7 +12,7 @@ import ProductContainer from "../components/ProductContainer.js";
 import CartProduct from "../components/CartProduct.js";
 
 export default function Home() {
-	const { setCardData, cartData, cartImage } = useContext(UserContext);
+	const { setCardData, cartData, cartImage, token } = useContext(UserContext);
 
 	const navigate = useNavigate();
 
@@ -61,7 +61,11 @@ export default function Home() {
 	}
 
 	function handleCheckout() {
-		navigate("/checkout", { state: { products: cartData } });
+		if (token) {
+			navigate("/checkout", { state: { products: cartData } });
+		} else {
+			navigate("/login");
+		}
 	}
 
 	if (homeProductsReady) {
