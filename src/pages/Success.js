@@ -14,8 +14,9 @@ export default function Success() {
 	//limpar carinho
 
 	let total = 0;
-    console.log(products);
-	if (products.lenght !== 0) {
+	console.log(products);
+	console.log(products.length !== 0);
+	if (products.length !== 0) {
 		return (
 			<SuccessContainer>
 				<Header>
@@ -167,13 +168,13 @@ const PriceHeader = styled.th`
 
 const Header = styled.header`
 	background-color: #273b51;
-    p{
-        font-size: 50px;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+	p {
+		font-size: 50px;
+		color: white;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 `;
 
 const Icon = styled.div`
