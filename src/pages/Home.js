@@ -21,7 +21,7 @@ import {
 } from "../style/styles.js";
 
 export default function Home() {
-	const { setCardData, cartData, cartImage, token, name } = useContext(UserContext);
+	const { setCardData, cartData, cartImage, token } = useContext(UserContext);
 
 	const navigate = useNavigate();
 
@@ -105,7 +105,7 @@ export default function Home() {
 						</Link>
 					) : (
 						<div className="login">
-							<h1>{`Olá ${name}`}</h1>
+							<h1>Olá cliente!</h1>
 						</div>
 					)}
 					<IconHome>
@@ -132,8 +132,15 @@ export default function Home() {
 						Total: R${(calculateTotal() * 0.9).toFixed(2)}
 					</p>
 					<div className="buttons">
-						<button style={{cursor:"pointer"}} onClick={() => setDisplay("none")}>Cancelar</button>
-						<button style={{cursor:"pointer"}} onClick={handleCheckout}>Comprar</button>
+						<button
+							style={{ cursor: "pointer" }}
+							onClick={() => setDisplay("none")}
+						>
+							Cancelar
+						</button>
+						<button style={{ cursor: "pointer" }} onClick={handleCheckout}>
+							Comprar
+						</button>
 					</div>
 				</SideMenu>
 				<OpacityDiv
