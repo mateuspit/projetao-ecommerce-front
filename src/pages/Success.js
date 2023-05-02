@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React from "react";
 import styled from "styled-components";
 import { IoChevronBack } from "react-icons/io5";
@@ -69,24 +70,29 @@ export default function Success() {
 				<h4>Nome do cliente:</h4>
 				<p>{purchaseData.paymentInfo.cardName}</p>
 			</ClienteName>
-			<h4>
-				<ProductsList>
-					<Product>Produto</Product>
-					<p>Quant.</p>
-					<p>Preço</p>
-				</ProductsList>
-			</h4>
-			{purchaseData.products.map((p) => {
-				total += p.amount * p.price;
-				return (
-					<ProductsList key={p._id}>
-						<Product>{p.name}</Product>
-						<p>{p.amount}</p>
-						<p>{p.price}</p>
-					</ProductsList>
-				);
-			})}
-			<h3>TOTAL A PAGAR: {total.toFixed(2)}</h3>
+			<Table>
+				<thead>
+					<TableTitles>
+						<ProductHeader>Produto</ProductHeader>
+						<QuantityHeader>Quant.</QuantityHeader>
+						<PriceHeader>Preço</PriceHeader>
+					</TableTitles>
+				</thead>
+				<tbody>
+					{purchaseData.products.map((p) => {
+						total += p.amount * p.price;
+						return (
+							<tr>
+								<ProductColumn>{p.name}</ProductColumn>
+								<QuantityColumn>{p.amount}</QuantityColumn>
+								<PriceColumn>{p.price}</PriceColumn>
+							</tr>
+						);
+					})}
+				</tbody>
+			</Table>
+
+			<h3><span>TOTAL A PAGAR: {total.toFixed(2)}</span></h3>
 
 			<ButtonDiv>
 				<Link to="/">
@@ -97,14 +103,98 @@ export default function Success() {
 		</SuccessContainer>
 	);
 }
+
+const Table = styled.table`
+	width: 90vw;
+	margin: 0 auto;
+	border-collapse: collapse;
+
+	thead {
+		th {
+			color: #273b51;
+			text-align: left;
+			font-weight: bold;
+			/*padding: 10px;*/
+			background-color: #f2f2f2;
+			border-bottom: 1px solid #ddd;
+		}
+	}
+
+	tbody {
+		tr {
+			color: #273b51;
+			display: flex;
+			align-items: center;
+			border-bottom: 1px solid #ddd;
+			margin-bottom: 2vh;
+		}
+	}
+`;
+
+const TableTitles = styled.tr`
+	display: flex;
+	justify-content: space-between;
+`;
+
+const ProductColumn = styled.td`
+	width: 50vw;
+	text-align: "center";
+`;
+
+const QuantityColumn = styled.td`
+	width: 17vw;
+	text-align: "center";
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+const PriceColumn = styled.td`
+	width: 23vw;
+	text-align: "center";
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+const ProductHeader = styled.th`
+	width: 50vw;
+	text-align: "center";
+	color: #273b51;
+	font-weight: 700;
+	margin-bottom: 2vh;
+`;
+
+const QuantityHeader = styled.th`
+	margin-bottom: 2vh;
+    display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 17vw;
+	text-align: "center";
+	color: #273b51;
+	font-weight: 700;
+`;
+
+const PriceHeader = styled.th`
+	margin-bottom: 2vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 23vw;
+	text-align: "center";
+	color: #273b51;
+	font-weight: 700;
+`;
+
 const Header = styled.header`
-    background-color: #273b51;
+	background-color: #273b51;
 `;
 
 const Icon = styled.div`
 	font-size: 40px;
 	position: absolute;
-	margin-top: 4vh;
+	margin-top: 5vh;
 	margin-left: 5vw;
 `;
 
@@ -112,12 +202,17 @@ const ClienteName = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: start;
-	line-height: 4vh;
+	line-height: 3vh;
 	margin-left: 5vw;
-	margin-bottom: 3vh;
-    margin-top: 2vh;
+	margin-bottom: 2vh;
+	margin-top: 2vh;
 	p {
 		color: #273b51;
+	}
+	h4 {
+		background-color: #f2f2f2;
+		border-bottom: 1px solid #ddd;
+		margin-right: 5vw;
 	}
 `;
 
@@ -159,26 +254,6 @@ const StandardButton = styled.button`
 	cursor: pointer; /* cursor ao passar por cima do botão */
 `;
 
-const Product = styled.p`
-	overflow-wrap: break-word;
-	width: 40vw;
-	color: #273b51;
-`;
-
-const ProductsList = styled.div`
-	color: black;
-	display: flex;
-	/*flex-direction: column;*/
-	justify-content: space-between;
-	align-items: flex-start;
-	margin-bottom: 2vh;
-	margin-left: 5vw;
-	margin-right: 5vw;
-	p {
-		color: #273b51;
-	}
-`;
-
 const SuccessTitle = styled.h1`
 	color: white;
 	display: flex;
@@ -206,6 +281,13 @@ const SuccessContainer = styled.div`
 		margin-top: 3vh;
 		font-weight: 700;
 		color: #273b51;
+		display: inline-block;
+		padding: 0.5em 1em;
+	}
+
+	h3 span {
+		background-color: #f2f2f2;
+		border-bottom: 1px solid #ddd;
 	}
 	h4 {
 		font-weight: 700;
