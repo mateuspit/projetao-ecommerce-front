@@ -14,7 +14,7 @@ This is the Front-end of our full-stack web application ! With data persistence 
 - Sign Up
 - Login
 - LogOut
-- List of producrs
+- List of products
 - Cart
 - Side menu
 - Buy products
